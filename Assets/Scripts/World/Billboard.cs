@@ -46,6 +46,8 @@ public class Billboard : MonoBehaviour
     {
         var cameraCurrent = Camera.current;
 
+        if (transform == null) return; 
+
         if (billboardX)
             transform.rotation = Quaternion.Euler(cameraCurrent.transform.rotation.eulerAngles.x,
                 cameraCurrent.transform.rotation.eulerAngles.y, 0f);

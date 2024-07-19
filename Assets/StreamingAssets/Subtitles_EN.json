@@ -48,5 +48,7 @@
     "ITM_Alarm": "Alarm Clock", 
     "ITM_WDNS": "WD-NoSquee (Door Type)",
     "ITM_Scissors": "Safety Scissors",
-    "ITM_Boots": "Big Ol' Boots"
+    "ITM_Boots": "Big Ol' Boots",
+
+    "World_DoorOpen": "*Door Open*"
 }
