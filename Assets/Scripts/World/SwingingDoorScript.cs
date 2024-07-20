@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 
 public class SwingingDoorScript : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class SwingingDoorScript : MonoBehaviour
     {
         this.myAudio = base.GetComponent<AudioSource>();
         this.bDoorLocked = true;
+        gc = GameControllerScript.Instance;
+        baldi = gc.baldiScrpt;
     }
 
     private void Update()
@@ -30,23 +33,39 @@ public class SwingingDoorScript : MonoBehaviour
         if (this.openTime <= 0f & this.bDoorOpen & !this.bDoorLocked)
         {
             this.bDoorOpen = false;
+            if (DifferentSides)
+            {
+                this.inside.material = this.inClosed;
+                this.outside.material = this.outClosed;
+                return;
+            }
+
             this.inside.material = this.closed;
             this.outside.material = this.closed;
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    protected virtual void OnTriggerStay(Collider other)
     {
         if (!this.bDoorLocked)
         {
             this.bDoorOpen = true;
-            this.inside.material = this.open;
-            this.outside.material = this.open;
+            if (DifferentSides)
+            {
+                this.inside.material = this.inOpen;
+                this.outside.material = this.outOpen;
+            }
+            else
+            {
+                this.inside.material = this.open;
+                this.outside.material = this.open;
+            }
+
             this.openTime = 2f;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (!(this.gc.notebooks < 2 & other.tag == "Player"))
         {
@@ -67,8 +86,17 @@ public class SwingingDoorScript : MonoBehaviour
         this.obstacle.SetActive(true);
         this.bDoorLocked = true;
         this.lockTime = time;
-        this.inside.material = this.locked;
-        this.outside.material = this.locked;
+
+        if (DifferentSides)
+        {
+            this.inside.material = this.inLocked;
+            this.outside.material = this.outLocked;
+        }
+        else
+        {
+            this.inside.material = this.locked;
+            this.outside.material = this.locked;
+        }
     }
 
     private void UnlockDoor()
@@ -76,13 +104,21 @@ public class SwingingDoorScript : MonoBehaviour
         this.barrier.enabled = false;
         this.obstacle.SetActive(false);
         this.bDoorLocked = false;
-        this.inside.material = this.closed;
-        this.outside.material = this.closed;
+        if (DifferentSides)
+        {
+            this.inside.material = this.inClosed;
+            this.outside.material = this.outClosed;
+        }
+        else
+        {
+            this.inside.material = this.closed;
+            this.outside.material = this.closed;
+        }
     }
 
-    public GameControllerScript gc;
+    private GameControllerScript gc;
 
-    public BaldiScript baldi;
+    private BaldiScript baldi;
 
     public MeshCollider barrier;
 
@@ -94,12 +130,37 @@ public class SwingingDoorScript : MonoBehaviour
 
     public MeshRenderer outside;
 
+    [SerializeField] private bool DifferentSides;
+
+    [Header("Materials")]
+    [ShowIf("DifferentSides")]
+    public Material inClosed;
+
+    [ShowIf("DifferentSides")]
+    public Material inOpen;
+
+    [ShowIf("DifferentSides")]
+    public Material inLocked;
+
+    [ShowIf("DifferentSides")]
+    public Material outClosed;
+
+    [ShowIf("DifferentSides")]
+    public Material outOpen;
+
+    [ShowIf("DifferentSides")]
+    public Material outLocked;
+
+    [HideIf("DifferentSides")]
     public Material closed;
 
+    [HideIf("DifferentSides")]
     public Material open;
 
+    [HideIf("DifferentSides")]
     public Material locked;
 
+    [Space()]
     public AudioClip doorOpen;
 
     public AudioClip baldiDoor;
@@ -114,5 +175,5 @@ public class SwingingDoorScript : MonoBehaviour
 
     private bool requirementMet;
 
-    private AudioSource myAudio;
+    protected AudioSource myAudio;
 }
