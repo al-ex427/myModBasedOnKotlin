@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KotlinInit : MonoBehaviour
+namespace KOTLIN
 {
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    private static void LoadEngine()
+    public class KotlinInit : MonoBehaviour
     {
-        DontDestroyOnLoad(Instantiate(Resources.Load<GameObject>("KotlinManager")));
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void LoadEngine()
+        {
+            DontDestroyOnLoad(Instantiate(Resources.Load<GameObject>("KotlinManager")));
+        }
     }
+
 }

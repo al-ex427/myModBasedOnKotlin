@@ -4,15 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum TranslationType
+namespace KOTLIN.Translation
+{
+    public enum TranslationType
 {
     TMPText_UI,
     TMPText,
     Text
 }
-
-namespace KOTLIN.Translation
-{
 
     public class TranslationObject : MonoBehaviour
     {

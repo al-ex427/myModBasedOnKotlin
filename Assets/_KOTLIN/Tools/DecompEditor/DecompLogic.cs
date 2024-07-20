@@ -2,24 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DecompType
+namespace KOTLIN
 {
-    Classic, 
-    Plus_PreV6, 
-    Plus_PostV6
-}
-
-public class DecompLogic : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+    public enum DecompType
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Classic,
+        Plus_PreV6,
+        Plus_PostV6
     }
 }
