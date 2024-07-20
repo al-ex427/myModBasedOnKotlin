@@ -3,16 +3,13 @@ using UnityEngine;
 
 public class EntranceScript : MonoBehaviour
 {
-    private void Start()
-    {
-        gc = GameControllerScript.Instance; 
-    }
-    public void Lower()
+
+    public void Lower(GameControllerScript gc)
     {
         if (decompType == DecompType.Classic)
         {
             base.transform.position = base.transform.position - new Vector3(0f, 10f, 0f);
-            if (this.gc.finaleMode)
+            if (gc.finaleMode)
             {
                 this.wall.material = this.map;
             }
@@ -34,8 +31,6 @@ public class EntranceScript : MonoBehaviour
 
         base.transform.position = base.transform.position + new Vector3(0f, 10f, 0f);
     }
-
-    private GameControllerScript gc;
 
     public Material map;
 

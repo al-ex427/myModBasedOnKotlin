@@ -239,7 +239,7 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		this.spoopMode = true; //Tells the game its time for spooky
         foreach (EntranceScript entrance in entrances)
         {
-			entrance.Lower(); 
+			entrance.Lower(this); 
         }
         this.baldiTutor.SetActive(false); //Turns off Baldi(The one that you see at the start of the game)
 		this.baldi.SetActive(true); //Turns on Baldi

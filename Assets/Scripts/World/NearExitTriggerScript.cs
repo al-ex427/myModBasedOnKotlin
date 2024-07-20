@@ -11,7 +11,7 @@ public class NearExitTriggerScript : MonoBehaviour
         if (this.gc.exitsReached < 3 & this.gc.finaleMode & other.tag == "Player")
         {
             this.gc.ExitReached();
-            this.es.Lower();
+            this.es.Lower(GameControllerScript.Instance);
             if (this.gc.baldiScrpt.isActiveAndEnabled) this.gc.baldiScrpt.Hear(base.transform.position, 8f);
         }
 
