@@ -132,7 +132,7 @@ public class SwingingDoorScript : MonoBehaviour
 
     [SerializeField] private bool DifferentSides;
 
-    [Header("Materials")]
+    [Header("Materials In")]
     [ShowIf("DifferentSides")]
     public Material inClosed;
 
@@ -142,6 +142,7 @@ public class SwingingDoorScript : MonoBehaviour
     [ShowIf("DifferentSides")]
     public Material inLocked;
 
+    [Header("Out")]
     [ShowIf("DifferentSides")]
     public Material outClosed;
 
