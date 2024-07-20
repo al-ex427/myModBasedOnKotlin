@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events; 
 
-[System.Serializable]
-public struct Item
+namespace KOTLIN.Items
 {
-    public string NameKey;
-    public Texture ItemSprite;
-    public UnityEvent OnUse;
-    public UnityEvent OnPickup;
-}
+    [System.Serializable]
+    public struct Item
+    {
+        public string NameKey;
+        public Texture ItemSprite;
+        public UnityEvent OnUse;
+        public UnityEvent OnPickup;
+    }
 
-public class ItemManager : MonoBehaviour
-{
-    public Item[] items; 
+    public class ItemManager : MonoBehaviour
+    {
+        public Item[] items;
+    }
+
 }

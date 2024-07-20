@@ -11,6 +11,7 @@ using Pixelplacement;
 using KOTLIN.Translation;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using KOTLIN.Items;
 public class GameControllerScript : Singleton<GameControllerScript>
 {
 	private List<EntranceScript> entrances = new List<EntranceScript>(); //
