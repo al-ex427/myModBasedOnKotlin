@@ -50,5 +50,27 @@
     "ITM_Scissors": "Safety Scissors",
     "ITM_Boots": "Big Ol' Boots",
 
-    "World_DoorOpen": "*Door Open*"
+    "World_DoorOpen": "*Door Open*",
+
+    "Char_Bully_Info": "Here at here school, we believe every good school needs a good bully! That's why we have this kid!",
+    "Char_Bully": "It's a Bully",
+    "Char_FirstPrize_Info": "Won 1st Prize at the Science Fair! Loves hugging people, rushing towards anyone it sees. Sadly, it turns super slowly",
+    "Char_FirstPrize": "1st Prize", 
+    "Char_Sweep_Info": "What do you do when the school opens in 7 hours and you haven't hired a janitor? Hire a broom! It sweeps <b>EVERYTHING</b>", 
+    "Char_Sweep": "Gotta Sweep",
+    "Char_Pri_Info": "\"If I see anyone breaking the school rules, I'll make sure justice is served! It tastes good and fills my tummy!\"",
+    "Char_Pri": "Principal of the Thing",
+    "Char_Baldi_Info": "Great teacher due to his incredible hearing abilities! He can not only tell where any sound came from, but who made it too!", 
+    "Char_Baldi": "Baldi", 
+    "Char_Crafters_Info": "Shy, and tries to be avoided. Doesn't like being looked at, and gets jealous at people with more notebooks than him.", 
+    "Char_Crafters": "Arts and Crafters",
+    "Char_Playtime_Info": "Despite her poor eyesight and short memory, she's always looking for a playmate!\n\n\"Let's Play!\"", 
+    "Char_Playtime": "Playtime", 
+
+    "POST_Boots": "Janitors must wear boots when sweeping!", 
+    "POST_WD": "WD-NoSquee!\nWhen your doors are too loud and you need 'em to be QUIET!", 
+    "POST_Rules": "<size=10>School rules!<size=5.65>\nWhen you follow the school rules:\nNo running\nNo entering faculty\nNo bullying\nNo drinking\nNo escaping detention\nNo fourth wall breaks", 
+    "POST_Recycle": "Please remember to <size=10>RECYCLE YOUR FOOD", 
+    "POST_Windows": "ATTENTION!\nDue to unkown reasons that have absolutely nothing to do with game design, school faculty cannot currently see through windows.", 
+    "POST_Phone": "Students:\nPlease refrain from using the phone while Professor Baldi is in the building.\nIt causes him to forget what he was doing and prevents him from hearing."
 }
