@@ -33,6 +33,8 @@ public class Billboard : MonoBehaviour
     // Needed to reduce the built-in unity calls
     private new Transform transform;
 
+    private Camera cam;
+
     private void Start()
     {
         // Making sure the sprite is set up correctly
@@ -40,27 +42,22 @@ public class Billboard : MonoBehaviour
 
         // Getting transform
         transform = base.transform;
+        cam = GameControllerScript.Instance.camera;
     }
 
     private void OnBecameVisible()
     {
-        var cameraCurrent = Camera.current;
-
-        if (transform == null || cameraCurrent == null) return; 
 
         if (billboardX)
-            transform.rotation = Quaternion.Euler(cameraCurrent.transform.rotation.eulerAngles.x,
-                cameraCurrent.transform.rotation.eulerAngles.y, 0f);
+            transform.rotation = Quaternion.Euler(cam.transform.rotation.eulerAngles.x,
+                cam.transform.rotation.eulerAngles.y, 0f);
         else
             transform.rotation = Quaternion.Euler(0f,
-                cameraCurrent.transform.rotation.eulerAngles.y, 0f);
+                cam.transform.rotation.eulerAngles.y, 0f);
     }
 
     private void OnWillRenderObject()
     {
-        // Getting current camera for further use
-        var cameraCurrent = Camera.current;
-
         // Counting time
         time += Time.deltaTime;
 
@@ -72,15 +69,15 @@ public class Billboard : MonoBehaviour
         {
             // Calcualting time to wait
             if (!doNotOptimize)
-                waitTime = Vector3.Distance(transform.position, cameraCurrent.transform.position) / UpdateFrequency;
+                waitTime = Vector3.Distance(transform.position, cam.transform.position) / UpdateFrequency;
 
             // Billboarding
             if (billboardX)
                 transform.rotation = Quaternion.Euler(Camera.current.transform.rotation.eulerAngles.x,
-                    cameraCurrent.transform.rotation.eulerAngles.y, 0f);
+                    cam.transform.rotation.eulerAngles.y, 0f);
             else
                 transform.rotation = Quaternion.Euler(0f,
-                    cameraCurrent.transform.rotation.eulerAngles.y, 0f);
+                    cam.transform.rotation.eulerAngles.y, 0f);
         }
         catch
         {
