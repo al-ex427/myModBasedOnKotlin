@@ -10,7 +10,8 @@ namespace KOTLIN.Lighting
 
         private void Start()
         {
-            UpdateLights(null);
+            Shader.SetGlobalTexture("_PlaceholderSpecular", Lightmap);
+            UpdateLights(Lightmap);
         }
 
         public void UpdateLights(Texture2D newMap)
@@ -18,7 +19,7 @@ namespace KOTLIN.Lighting
             if (newMap != null)
                 Lightmap = newMap;
 
-            Shader.SetGlobalTexture("_Lightmap", Lightmap);
+            Shader.SetGlobalTexture("_GlobalLights", Lightmap);
         }
     }
 
