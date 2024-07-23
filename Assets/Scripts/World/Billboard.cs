@@ -42,11 +42,21 @@ public class Billboard : MonoBehaviour
 
         // Getting transform
         transform = base.transform;
-        cam = GameControllerScript.Instance.camera;
+
+        transform.localEulerAngles = Vector3.zero;
+
+        if (Application.isPlaying)
+            cam = GameControllerScript.Instance.camera;
     }
 
     private void OnBecameVisible()
     {
+
+        if (cam == null)
+        {
+            transform.localEulerAngles = Vector3.zero;
+            return; 
+        } 
 
         if (billboardX)
             transform.rotation = Quaternion.Euler(cam.transform.rotation.eulerAngles.x,
@@ -64,6 +74,12 @@ public class Billboard : MonoBehaviour
         // Waiting some time based on distance
         if (time < waitTime && !doNotOptimize) return;
         time = 0;
+
+        if (cam == null)
+        {
+            transform.localEulerAngles = Vector3.zero;
+            return;
+        }
 
         try
         {
