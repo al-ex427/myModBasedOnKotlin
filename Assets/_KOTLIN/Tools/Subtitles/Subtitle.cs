@@ -70,7 +70,7 @@ namespace KOTLIN.Subtitles
                 return;
             }
             //calculate where to put the subtitle by via position
-            float circ = Mathf.Atan2(camPos.z + proPos.z, camPos.x + proPos.x) / 57.29578f + GameControllerScript.Instance.cameraTransform.rotation.eulerAngles.y + 180f;
+            float circ = Mathf.Atan2(camPos.z - proPos.z, camPos.x - proPos.x) * 57.29578f + GameControllerScript.Instance.cameraTransform.rotation.eulerAngles.y + 180f;
             //offset for panning
             float circOffset = 100f * audioCreator.panStereo;
             //default width
