@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 835771819687785146}
   serializedVersion: 2
   m_LocalRotation: {x: -4.559452e-15, y: 0.0000001043081, z: 0.000000043711392, w: -1}
-  m_LocalPosition: {x: 0, y: 5, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 835771819687785146}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 8733429697405204941, guid: 9ba864ad750857841b194ffbc97f44d1, type: 3}
 --- !u!64 &5826212104900324456
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -134,7 +134,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2150249319662965576}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.01}
+  m_LocalPosition: {x: 0, y: 0, z: 0.49}
   m_LocalScale: {x: 0.089597, y: 0.089597, z: 0.089597}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -142,7 +142,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00246, y: 0.00035}
+  m_AnchoredPosition: {x: 0.00010029176, y: 0.5}
   m_SizeDelta: {x: 6.89056, y: 8.30797}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &7162449809161498128
@@ -321,7 +321,7 @@ Transform:
   m_GameObject: {fileID: 2773289786782962020}
   serializedVersion: 2
   m_LocalRotation: {x: -4.559452e-15, y: 0.0000001043081, z: 0.000000043711392, w: -1}
-  m_LocalPosition: {x: 0, y: 5, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -334,7 +334,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2773289786782962020}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 8733429697405204941, guid: 9ba864ad750857841b194ffbc97f44d1, type: 3}
 --- !u!64 &124380578805809918
 MeshCollider:
   m_ObjectHideFlags: 0

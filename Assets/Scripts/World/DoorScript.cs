@@ -6,6 +6,9 @@ public class DoorScript : KOTLIN.Interactions.Interactable
     private void Start()
     {
         this.myAudio = base.GetComponent<AudioSource>();
+        player = GameControllerScript.Instance.playerTransform;
+        baldi = GameControllerScript.Instance.baldiScrpt; 
+
     }
 
     private void Update()
