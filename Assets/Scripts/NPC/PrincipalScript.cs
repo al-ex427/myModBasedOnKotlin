@@ -3,6 +3,8 @@ using UnityEngine.AI;
 
 public class PrincipalScript : MonoBehaviour
 {
+    [SerializeField] private Transform DetentionSpawn; 
+
     private void Start()
     {
         this.agent = base.GetComponent<NavMeshAgent>(); //Get the agent
@@ -126,10 +128,10 @@ public class PrincipalScript : MonoBehaviour
         {
             this.inOffice = true;
             this.playerScript.principalBugFixer = 0;
-            this.agent.Warp(new Vector3(10f, 0f, 170f)); //Teleport the principal to the office
+            this.agent.Warp(DetentionSpawn.position); //Teleport the principal to the office
             this.agent.isStopped = true; //Stop the principal from moving
             this.cc.enabled = false;
-            other.transform.position = new Vector3(10f, 4f, 160f); // Teleport the player to the office
+            other.transform.position = DetentionSpawn.position; // Teleport the player to the office
             other.transform.LookAt(new Vector3(base.transform.position.x, other.transform.position.y, base.transform.position.z)); // Get the plaer to look at the principal
             this.cc.enabled = true;
             this.audioQueue.QueueAudio(this.aud_Delay);
