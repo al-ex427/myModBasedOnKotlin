@@ -10,12 +10,6 @@
             "m_Id": "f964e9e0e9204fb58f9a27f858cfc2e1"
         },
         {
-            "m_Id": "50dfe0ee83c2445299e3b933737dcd93"
-        },
-        {
-            "m_Id": "76e2a42fbdcb424d85364cd6663eda15"
-        },
-        {
             "m_Id": "2c6ac6d27e444ca1891a767f5ca631cc"
         },
         {
@@ -1350,34 +1344,6 @@
 }
 
 {
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector2ShaderProperty",
-    "m_ObjectId": "50dfe0ee83c2445299e3b933737dcd93",
-    "m_Guid": {
-        "m_GuidSerialized": "156c9be1-7b64-4d4b-9977-8f4adf1fd2f4"
-    },
-    "m_Name": "Tiling",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Tiling",
-    "m_DefaultReferenceName": "_Tiling",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 0.0,
-        "w": 0.0
-    }
-}
-
-{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.BlockNode",
     "m_ObjectId": "5364dd255675460eb3d95217f0298209",
@@ -1836,34 +1802,6 @@
 }
 
 {
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector2ShaderProperty",
-    "m_ObjectId": "76e2a42fbdcb424d85364cd6663eda15",
-    "m_Guid": {
-        "m_GuidSerialized": "9af99dc5-7f5f-464a-a8d8-358e85b9c307"
-    },
-    "m_Name": "Offset",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Offset",
-    "m_DefaultReferenceName": "_Offset",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.0
-    }
-}
-
-{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
     "m_ObjectId": "7bef148b5bb54edbbbb4dc0844dc39eb",
@@ -1945,7 +1883,7 @@
     "m_RefNameGeneratedByDisplayName": "Lightmap",
     "m_DefaultReferenceName": "_Lightmap",
     "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
+    "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
@@ -2111,12 +2049,6 @@
         },
         {
             "m_Id": "f964e9e0e9204fb58f9a27f858cfc2e1"
-        },
-        {
-            "m_Id": "50dfe0ee83c2445299e3b933737dcd93"
-        },
-        {
-            "m_Id": "76e2a42fbdcb424d85364cd6663eda15"
         },
         {
             "m_Id": "733043e4727f4205a4111c6bd6ee210b"
