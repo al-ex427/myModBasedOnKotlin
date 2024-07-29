@@ -1,10 +1,11 @@
+using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace KOTLIN.Lighting
 {
-    public class LightingManager : MonoBehaviour
+    public class LightingManager : Singleton<LightingManager>
     {
         public Texture2D Lightmap;
 
