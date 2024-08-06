@@ -1882,7 +1882,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "Lightmap",
     "m_DefaultReferenceName": "_Lightmap",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_GlobalLights",
     "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
