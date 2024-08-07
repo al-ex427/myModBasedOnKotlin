@@ -72,5 +72,6 @@
     "POST_Rules": "<size=10>School rules!<size=5.65>\nWhen you follow the school rules:\nNo running\nNo entering faculty\nNo bullying\nNo drinking\nNo escaping detention\nNo fourth wall breaks", 
     "POST_Recycle": "Please remember to <size=10>RECYCLE YOUR FOOD", 
     "POST_Windows": "ATTENTION!\nDue to unkown reasons that have absolutely nothing to do with game design, school faculty cannot currently see through windows.", 
-    "POST_Phone": "Students:\nPlease refrain from using the phone while Professor Baldi is in the building.\nIt causes him to forget what he was doing and prevents him from hearing."
+    "POST_Phone": "Students:\nPlease refrain from using the phone while Professor Baldi is in the building.\nIt causes him to forget what he was doing and prevents him from hearing.", 
+    "POST_Scissors": "Rememebr Kids:\nSafety scissors are great for cutting:\nPaper\nJumpropes\nWiring\nHomework"
 }
