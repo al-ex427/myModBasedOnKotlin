@@ -76,18 +76,7 @@ public class GameControllerScript : Singleton<GameControllerScript>
 			{
 				Time.timeScale = 1f;
 			}
-			if (Input.GetMouseButtonDown(1) && Time.timeScale != 0f)
-			{
-				this.UseItem();
-			}
-			if ((Input.GetAxis("Mouse ScrollWheel") > 0f && Time.timeScale != 0f))
-			{
-				this.DecreaseItemSelection();
-			}
-			else if ((Input.GetAxis("Mouse ScrollWheel") < 0f && Time.timeScale != 0f))
-			{
-				this.IncreaseItemSelection();
-			}
+
 			if (Time.timeScale != 0f)
 			{
                 for (int i = 0; i < numericKeys.Length; ++i)
@@ -98,6 +87,20 @@ public class GameControllerScript : Singleton<GameControllerScript>
                         this.UpdateItemSelection();
 						break;
                     }
+                }
+
+                if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+                {
+                    this.DecreaseItemSelection();
+                }
+                else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+                {
+                    this.IncreaseItemSelection();
+                }
+
+                if (Input.GetMouseButtonDown(1))
+                {
+                    this.UseItem();
                 }
 
                 if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))  //remember to make an input manager
