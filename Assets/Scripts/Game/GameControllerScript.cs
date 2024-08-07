@@ -15,17 +15,9 @@ using KOTLIN.Items;
 public class GameControllerScript : Singleton<GameControllerScript>
 {
 	private List<EntranceScript> entrances = new List<EntranceScript>(); //
+    KeyCode[] numericKeys = { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9 };
 
-	public GameControllerScript()
-	{
-		int[] array = new int[3];
-		array[0] = -80;
-		array[1] = -40;
-		this.itemSelectOffset = array;
-		//base..ctor();
-	}
-
-	[Obsolete]
+    [Obsolete]
 	private void Start()
 	{
 		this.cullingMask = this.camera.cullingMask; // Changes cullingMask in the Camera
@@ -45,7 +37,17 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		{
 			entrances.Add(entrance);
 		}
-	}
+
+        int[] array = new int[itemSlot.Length];
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            array[i] = (int)itemSlot[i].rectTransform.anchoredPosition.x;
+        }
+
+		Array.Resize(ref item, itemSlot.Length);
+		Array.Resize(ref numericKeys, array.Length);
+        this.itemSelectOffset = array;
+    }
 
 	private void Update()
 	{
@@ -88,23 +90,17 @@ public class GameControllerScript : Singleton<GameControllerScript>
 			}
 			if (Time.timeScale != 0f)
 			{
-				if (Input.GetKeyDown(KeyCode.Alpha1))
-				{
-					this.itemSelected = 0;
-					this.UpdateItemSelection();
-				}
-				else if (Input.GetKeyDown(KeyCode.Alpha2))
-				{
-					this.itemSelected = 1;
-					this.UpdateItemSelection();
-				}
-				else if (Input.GetKeyDown(KeyCode.Alpha3))
-				{
-					this.itemSelected = 2;
-					this.UpdateItemSelection();
-				}
+                for (int i = 0; i < numericKeys.Length; ++i)
+                {
+                    if (Input.GetKeyDown(numericKeys[i]))
+                    {
+                        this.itemSelected = i;
+                        this.UpdateItemSelection();
+						break;
+                    }
+                }
 
-				if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))  //remember to make an input manager
+                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))  //remember to make an input manager
                 {
                     Ray ray = Camera.main.ScreenPointToRay(new Vector3((float)(Screen.width / 2), (float)(Screen.height / 2), 0f));
                     RaycastHit raycastHit;
@@ -315,7 +311,7 @@ public class GameControllerScript : Singleton<GameControllerScript>
 	private void IncreaseItemSelection()
 	{
 		this.itemSelected++;
-		if (this.itemSelected > 2)
+		if (this.itemSelected > itemSlot.Length -1)
 		{
 			this.itemSelected = 0;
 		}
@@ -328,7 +324,7 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		this.itemSelected--;
 		if (this.itemSelected < 0)
 		{
-			this.itemSelected = 2;
+			this.itemSelected = itemSlot.Length - 1;
 		}
 		this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], 0f, 0f); //Moves the item selector background(the red rectangle)
 		this.UpdateItemName();
@@ -367,115 +363,6 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		if (this.item[this.itemSelected] != 0)
 		{
 			itemManager.items[this.item[itemSelected]].OnUse?.Invoke(); 
-/*			if (this.item[this.itemSelected] == 1)
-			{
-				this.player.stamina = this.player.maxStamina * 2f;
-				this.ResetItem();
-			}
-			else if (this.item[this.itemSelected] == 2)
-			{
-				Ray ray = Camera.main.ScreenPointToRay(new Vector3((float)(Screen.width / 2), (float)(Screen.height / 2), 0f));
-				RaycastHit raycastHit;
-				if (Physics.Raycast(ray, out raycastHit) && (raycastHit.collider.tag == "SwingingDoor" & Vector3.Distance(this.playerTransform.position, raycastHit.transform.position) <= 10f))
-				{
-					raycastHit.collider.gameObject.GetComponent<SwingingDoorScript>().LockDoor(15f);
-					this.ResetItem();
-				}
-			}
-			else if (this.item[this.itemSelected] == 3)
-			{
-				Ray ray2 = Camera.main.ScreenPointToRay(new Vector3((float)(Screen.width / 2), (float)(Screen.height / 2), 0f));
-				RaycastHit raycastHit2;
-				if (Physics.Raycast(ray2, out raycastHit2) && (raycastHit2.collider.tag == "Door" & Vector3.Distance(this.playerTransform.position, raycastHit2.transform.position) <= 10f))
-				{
-					DoorScript component = raycastHit2.collider.gameObject.GetComponent<DoorScript>();
-					if (component.DoorLocked)
-					{
-						component.UnlockDoor();
-						component.OpenDoor();
-						this.ResetItem();
-					}
-				}
-			}
-			else if (this.item[this.itemSelected] == 4)
-			{
-				UnityEngine.Object.Instantiate<GameObject>(this.bsodaSpray, this.playerTransform.position, this.cameraTransform.rotation);
-				this.ResetItem();
-				this.player.ResetGuilt("drink", 1f);
-				this.audioDevice.PlayOneShot(this.aud_Soda);
-			}
-			else if (this.item[this.itemSelected] == 5)
-			{
-				Ray ray3 = Camera.main.ScreenPointToRay(new Vector3((float)(Screen.width / 2), (float)(Screen.height / 2), 0f));
-				RaycastHit raycastHit3;
-				if (Physics.Raycast(ray3, out raycastHit3))
-				{
-					if (raycastHit3.collider.name == "BSODAMachine" & Vector3.Distance(this.playerTransform.position, raycastHit3.transform.position) <= 10f)
-					{
-						this.ResetItem();
-						this.CollectItem(4);
-					}
-					else if (raycastHit3.collider.name == "ZestyMachine" & Vector3.Distance(this.playerTransform.position, raycastHit3.transform.position) <= 10f)
-					{
-						this.ResetItem();
-						this.CollectItem(1);
-					}
-					else if (raycastHit3.collider.name == "PayPhone" & Vector3.Distance(this.playerTransform.position, raycastHit3.transform.position) <= 10f)
-					{
-						raycastHit3.collider.gameObject.GetComponent<TapePlayerScript>().Play();
-						this.ResetItem();
-					}
-				}
-			}
-			else if (this.item[this.itemSelected] == 6)
-			{
-				Ray ray4 = Camera.main.ScreenPointToRay(new Vector3((float)(Screen.width / 2), (float)(Screen.height / 2), 0f));
-				RaycastHit raycastHit4;
-				if (Physics.Raycast(ray4, out raycastHit4) && (raycastHit4.collider.name == "TapePlayer" & Vector3.Distance(this.playerTransform.position, raycastHit4.transform.position) <= 10f))
-				{
-					raycastHit4.collider.gameObject.GetComponent<TapePlayerScript>().Play();
-					this.ResetItem();
-				}
-			}
-			else if (this.item[this.itemSelected] == 7)
-			{
-				GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(this.alarmClock, this.playerTransform.position, this.cameraTransform.rotation);
-				gameObject.GetComponent<AlarmClockScript>().baldi = this.baldiScrpt;
-				this.ResetItem();
-			}
-			else if (this.item[this.itemSelected] == 8)
-			{
-				Ray ray5 = Camera.main.ScreenPointToRay(new Vector3((float)(Screen.width / 2), (float)(Screen.height / 2), 0f));
-				RaycastHit raycastHit5;
-				if (Physics.Raycast(ray5, out raycastHit5) && (raycastHit5.collider.tag == "Door" & Vector3.Distance(this.playerTransform.position, raycastHit5.transform.position) <= 10f))
-				{
-					raycastHit5.collider.gameObject.GetComponent<DoorScript>().SilenceDoor();
-					this.ResetItem();
-					this.audioDevice.PlayOneShot(this.aud_Spray);
-				}
-			}
-			else if (this.item[this.itemSelected] == 9)
-			{
-				Ray ray6 = Camera.main.ScreenPointToRay(new Vector3((float)(Screen.width / 2), (float)(Screen.height / 2), 0f));
-				RaycastHit raycastHit6;
-				if (this.player.jumpRope)
-				{
-					this.player.DeactivateJumpRope();
-					this.playtimeScript.Disappoint();
-					this.ResetItem();
-				}
-				else if (Physics.Raycast(ray6, out raycastHit6) && raycastHit6.collider.name == "1st Prize")
-				{
-					this.firstPrizeScript.GoCrazy();
-					this.ResetItem();
-				}
-			}
-			else if (this.item[this.itemSelected] == 10)
-			{
-				this.player.ActivateBoots();
-				base.StartCoroutine(this.BootAnimation());
-				this.ResetItem();
-			}*/
 		}
 	}
 
@@ -483,7 +370,7 @@ public class GameControllerScript : Singleton<GameControllerScript>
 	{
 		float time = 15f;
 		float height = 375f;
-		Vector3 position = default(Vector3);
+		Vector3 position = default;
 		this.boots.gameObject.SetActive(true);
 		while (height > -375f)
 		{
@@ -650,7 +537,7 @@ public class GameControllerScript : Singleton<GameControllerScript>
 
 	public int itemSelected;
 
-	public int[] item = new int[3];
+	public int[] item = new int[0];
 
 	public RawImage[] itemSlot = new RawImage[3];
 
