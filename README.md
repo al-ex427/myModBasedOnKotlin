@@ -40,7 +40,7 @@ You could use the current state of the decompile for your mods but keep in mind 
 - [x] Tile Lighting (currently in work)
 - [x] Map Building tool (currently in work)
 - [ ] BB+ UI 
-- [ ] BB+ Event System (currently in work)
+- [X] BB+ Event System
 
 <!-- TOC --><a name="how-do-i-use-kotlin"></a>
 ## How do I use Kotlin?
