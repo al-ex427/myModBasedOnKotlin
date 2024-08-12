@@ -73,5 +73,15 @@
     "POST_Recycle": "Please remember to <size=10>RECYCLE YOUR FOOD", 
     "POST_Windows": "ATTENTION!\nDue to unkown reasons that have absolutely nothing to do with game design, school faculty cannot currently see through windows.", 
     "POST_Phone": "Students:\nPlease refrain from using the phone while Professor Baldi is in the building.\nIt causes him to forget what he was doing and prevents him from hearing.", 
-    "POST_Scissors": "Rememebr Kids:\nSafety scissors are great for cutting:\nPaper\nJumpropes\nWiring\nHomework"
+    "POST_Scissors": "Rememebr Kids:\nSafety scissors are great for cutting:\nPaper\nJumpropes\nWiring\nHomework", 
+
+    "CHALK_Cheese": "Today's lesson:\nHow to eat Cheese", 
+    "CHALK_Math": "Math = More Math=\nMath\nMath<sup>Math<sup>Math<sup>Math<sup>Math", 
+    "CHALK_Lore": "place lore here", 
+    "CHALK_Health": "Healthy", 
+    "CHALK_Dab": "Doug, dab again and pay.", 
+    "CHALK_Big": "The world is big. Class dismissed.", 
+    "CHALK_Wow": "wow", 
+    "CHALK_Homestar": "Look! A HomestarRunner Reference!",
+    "CHALK_Lazy": "Sorry, was too lazy to add more subjects"
 }
