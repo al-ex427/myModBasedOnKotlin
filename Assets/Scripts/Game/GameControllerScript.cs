@@ -318,7 +318,7 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		{
 			this.itemSelected = 0;
 		}
-		this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], 0f, 0f); //Moves the item selector background(the red rectangle)
+		this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], itemSelect.anchoredPosition.y, 0f); //Moves the item selector background(the red rectangle)
 		this.UpdateItemName();
 	}
 
@@ -329,13 +329,13 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		{
 			this.itemSelected = itemSlot.Length - 1;
 		}
-		this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], 0f, 0f); //Moves the item selector background(the red rectangle)
+		this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], itemSelect.anchoredPosition.y, 0f); //Moves the item selector background(the red rectangle)
 		this.UpdateItemName();
 	}
 
 	private void UpdateItemSelection()
 	{
-		this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], 0f, 0f); //Moves the item selector background(the red rectangle)
+		this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], itemSelect.anchoredPosition.y, 0f); //Moves the item selector background(the red rectangle)
 		this.UpdateItemName();
 	}
 
