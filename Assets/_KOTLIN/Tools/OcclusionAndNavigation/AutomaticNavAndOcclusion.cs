@@ -31,7 +31,6 @@ public class AutomaticNavAndOcclusion : Singleton<AutomaticNavAndOcclusion>
                 AiParent.SetActive(true);
 
                 navMeshSurface.BuildNavMesh();
-
                 if (disableAI)
                     AiParent.SetActive(false);
             }

@@ -1526,7 +1526,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1102112503153748797}
   - component: {fileID: 5633570180346694902}
-  - component: {fileID: 2832782041207037812}
   m_Layer: 0
   m_Name: PlusEntrance
   m_TagString: Untagged
@@ -1565,20 +1564,6 @@ MonoBehaviour:
   map: {fileID: 2100000, guid: 9d22f3f6ffa828244a03e5f533d7944b, type: 2}
   wall: {fileID: 361524141420136742}
   decompType: 1
---- !u!114 &2832782041207037812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8249204174376350952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b94a6dedd38e95546b46fa239094be73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
-  lastType: 1
 --- !u!1 &8252281026293062232
 GameObject:
   m_ObjectHideFlags: 0

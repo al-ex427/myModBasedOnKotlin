@@ -6,8 +6,8 @@ public class Boots : MonoBehaviour
 {
     public void OnUse()
     {
-        GameControllerScript.Instance.player.ActivateBoots();
         base.StartCoroutine(GameControllerScript.Instance.BootAnimation());
+        GameControllerScript.Instance.player.ActivateBoots();
         GameControllerScript.Instance.ResetItem();
     }
 }
