@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using KOTLIN.Items;
+using UnityEngine;
 
 public class BullyScript : MonoBehaviour
 {
@@ -64,18 +65,18 @@ public class BullyScript : MonoBehaviour
     {
         if (other.transform.tag == "Player") // If touching the player
         {
-            if (this.gc.item[0] == 0 & this.gc.item[1] == 0 & this.gc.item[2] == 0) // If the player has no items
+            if (ItemManager.Instance.item[0] == 0 & ItemManager.Instance.item[1] == 0 & ItemManager.Instance.item[2] == 0) // If the player has no items
             {
                 this.audioDevice.PlayOneShot(this.aud_Denied); // "What, no items? No Items? No passsssss"
             }
             else
             {
                 int num = Mathf.RoundToInt(UnityEngine.Random.Range(0f, 2f)); //Get a random item slot
-                while (this.gc.item[num] == 0) //If the selected slot is empty
+                while (ItemManager.Instance.item[num] == 0) //If the selected slot is empty
                 {
                     num = Mathf.RoundToInt(UnityEngine.Random.Range(0f, 2f)); // Choose another slot
                 }
-                this.gc.LoseItem(num); // Remove the item selected
+                ItemManager.Instance.LoseItem(num); // Remove the item selected
                 int num2 = Mathf.RoundToInt(UnityEngine.Random.Range(0f, 1f));
                 this.audioDevice.PlayOneShot(this.aud_Thanks[num2]);
                 this.Reset();

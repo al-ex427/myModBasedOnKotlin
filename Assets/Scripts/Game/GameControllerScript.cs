@@ -15,8 +15,6 @@ using KOTLIN.Items;
 public class GameControllerScript : Singleton<GameControllerScript>
 {
 	private List<EntranceScript> entrances = new List<EntranceScript>(); //
-    KeyCode[] numericKeys = { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9 };
-
     [Obsolete]
 	private void Start()
 	{
@@ -37,16 +35,6 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		{
 			entrances.Add(entrance);
 		}
-
-        int[] array = new int[itemSlot.Length];
-        for (int i = 0; i < itemSlot.Length; i++)
-        {
-            array[i] = (int)itemSlot[i].rectTransform.anchoredPosition.x;
-        }
-
-		Array.Resize(ref item, itemSlot.Length);
-		Array.Resize(ref numericKeys, array.Length);
-        this.itemSelectOffset = array;
     }
 
 	private void Update()
@@ -79,30 +67,6 @@ public class GameControllerScript : Singleton<GameControllerScript>
 
 			if (Time.timeScale != 0f)
 			{
-                for (int i = 0; i < numericKeys.Length; ++i)
-                {
-                    if (Input.GetKeyDown(numericKeys[i]))
-                    {
-                        this.itemSelected = i;
-                        this.UpdateItemSelection();
-						break;
-                    }
-                }
-
-                if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-                {
-                    this.DecreaseItemSelection();
-                }
-                else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-                {
-                    this.IncreaseItemSelection();
-                }
-
-                if (Input.GetMouseButtonDown(1))
-                {
-                    this.UseItem();
-                }
-
                 if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))  //remember to make an input manager
                 {
                     Ray ray = Camera.main.ScreenPointToRay(new Vector3((float)(Screen.width / 2), (float)(Screen.height / 2), 0f));
@@ -311,64 +275,6 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		}
 	}
 
-	private void IncreaseItemSelection()
-	{
-		this.itemSelected++;
-		if (this.itemSelected > itemSlot.Length -1)
-		{
-			this.itemSelected = 0;
-		}
-		this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], itemSelect.anchoredPosition.y, 0f); //Moves the item selector background(the red rectangle)
-		this.UpdateItemName();
-	}
-
-	private void DecreaseItemSelection()
-	{
-		this.itemSelected--;
-		if (this.itemSelected < 0)
-		{
-			this.itemSelected = itemSlot.Length - 1;
-		}
-		this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], itemSelect.anchoredPosition.y, 0f); //Moves the item selector background(the red rectangle)
-		this.UpdateItemName();
-	}
-
-	private void UpdateItemSelection()
-	{
-		this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], itemSelect.anchoredPosition.y, 0f); //Moves the item selector background(the red rectangle)
-		this.UpdateItemName();
-	}
-
-	//basic v0.3 prerelease
-	public void CollectItem(int item_ID)
-	{
-        int emptySlotIndex = -1;
-        for (int i = 0; i < this.item.Length; i++)
-        {
-            if (this.item[i] == 0)
-            {
-                emptySlotIndex = i;
-                break;
-            }
-        }
-
-        int slotIndex = emptySlotIndex != -1 ? emptySlotIndex : this.itemSelected;
-
-        this.item[slotIndex] = item_ID;
-        this.itemSlot[slotIndex].texture = itemManager.items[item_ID].ItemSprite;
-
-        itemManager.items[this.item[itemSelected]].OnPickup?.Invoke();
-        this.UpdateItemName();
-    }
-
-	private void UseItem()
-	{
-		if (this.item[this.itemSelected] != 0)
-		{
-			itemManager.items[this.item[itemSelected]].OnUse?.Invoke(); 
-		}
-	}
-
 	public IEnumerator BootAnimation()
 	{
 		float time = 15f;
@@ -409,24 +315,6 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		yield break;
 	}
 
-	public void ResetItem()
-	{
-		this.item[this.itemSelected] = 0;
-		this.itemSlot[this.itemSelected].texture = itemManager.items[0].ItemSprite;
-		this.UpdateItemName();
-	}
-
-	public void LoseItem(int id)
-	{
-        this.item[id] = 0;
-        this.itemSlot[id].texture = itemManager.items[0].ItemSprite;
-        this.UpdateItemName();
-    }
-
-	private void UpdateItemName()
-	{
-		this.itemText.text = TranslationManager.Instance.GetTranslationString(itemManager.items[this.item[this.itemSelected]].NameKey);
-	}
 
 	public void ExitReached()
 	{
@@ -540,12 +428,6 @@ public class GameControllerScript : Singleton<GameControllerScript>
 
 	public int itemSelected;
 
-	public int[] item = new int[0];
-
-	public RawImage[] itemSlot = new RawImage[3];
-
-	public TMP_Text itemText;	
-
 	public GameObject bsodaSpray;
 
 	public GameObject alarmClock;
@@ -559,10 +441,6 @@ public class GameControllerScript : Singleton<GameControllerScript>
 	public GameObject warning;
 
 	public GameObject reticle;
-
-	public RectTransform itemSelect;
-
-	private int[] itemSelectOffset;
 
 	private bool gamePaused;
 

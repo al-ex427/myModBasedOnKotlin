@@ -1,3 +1,4 @@
+using KOTLIN.Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class YellowLock : MonoBehaviour
         if (Physics.Raycast(ray, out raycastHit) && (raycastHit.collider.tag == "SwingingDoor" & Vector3.Distance(GameControllerScript.Instance.playerTransform.position, raycastHit.transform.position) <= 10f))
         {
             raycastHit.collider.gameObject.GetComponent<SwingingDoorScript>().LockDoor(15f);
-            GameControllerScript.Instance.ResetItem();
+            ItemManager.Instance.ResetItem();
         }
     }
 }

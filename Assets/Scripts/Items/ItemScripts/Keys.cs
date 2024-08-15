@@ -1,3 +1,4 @@
+using KOTLIN.Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class Keys : MonoBehaviour
             {
                 component.UnlockDoor();
                 component.OpenDoor();
-                GameControllerScript.Instance.ResetItem();
+                ItemManager.Instance.ResetItem();
             }
         }
     }

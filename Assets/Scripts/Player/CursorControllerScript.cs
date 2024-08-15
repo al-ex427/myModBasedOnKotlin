@@ -8,6 +8,7 @@ public class CursorControllerScript : MonoBehaviour
 
     public void LockCursor()
     {
+        return; 
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor(prevent it from moving)
         Cursor.visible = false;
     }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using KOTLIN.Items;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemImageScript : MonoBehaviour
@@ -7,7 +8,7 @@ public class ItemImageScript : MonoBehaviour
     {
         if (this.gs != null)
         {
-            Texture texture = this.gs.itemSlot[this.gs.itemSelected].texture;
+            Texture texture = ItemManager.Instance.itemSlot[ItemManager.Instance.itemSelected].texture;
             if (texture == this.blankSprite)
             {
                 this.sprite.texture = this.noItemSprite;

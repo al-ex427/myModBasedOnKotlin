@@ -1,3 +1,4 @@
+using KOTLIN.Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class BAHaDT : MonoBehaviour
         if (Physics.Raycast(ray4, out raycastHit4) && (raycastHit4.collider.name == "TapePlayer" & Vector3.Distance(GameControllerScript.Instance.playerTransform.position, raycastHit4.transform.position) <= 10f))
         {
             raycastHit4.collider.gameObject.GetComponent<TapePlayerScript>().Play();
-            GameControllerScript.Instance.ResetItem();
+            ItemManager.Instance.ResetItem();
         }
     }
 }

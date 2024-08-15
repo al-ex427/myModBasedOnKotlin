@@ -1,3 +1,4 @@
+using KOTLIN.Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,12 +13,12 @@ public class Scissors : MonoBehaviour
         {
             GameControllerScript.Instance.player.DeactivateJumpRope();
             GameControllerScript.Instance.playtimeScript.Disappoint();
-            GameControllerScript.Instance.ResetItem();
+            ItemManager.Instance.ResetItem();
         }
         else if (Physics.Raycast(ray6, out raycastHit6) && raycastHit6.collider.name == "1st Prize")
         {
             GameControllerScript.Instance.firstPrizeScript.GoCrazy();
-            GameControllerScript.Instance.ResetItem();
+            ItemManager.Instance.ResetItem();
         }
     }
 }

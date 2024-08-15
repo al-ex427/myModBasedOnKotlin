@@ -1,3 +1,4 @@
+using KOTLIN.Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,6 @@ public class Boots : MonoBehaviour
     {
         base.StartCoroutine(GameControllerScript.Instance.BootAnimation());
         GameControllerScript.Instance.player.ActivateBoots();
-        GameControllerScript.Instance.ResetItem();
+        ItemManager.Instance.ResetItem();
     }
 }

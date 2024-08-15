@@ -1,9 +1,11 @@
-﻿public class PickupScript : KOTLIN.Interactions.Interactable
+﻿using KOTLIN.Items;
+
+public class PickupScript : KOTLIN.Interactions.Interactable
 {
     public override void Interact()
     {
         gameObject.SetActive(false);
-        GameControllerScript.Instance.CollectItem(ItemID);
+        ItemManager.Instance.CollectItem(ItemID);
     }
 
     [UnityEngine.SerializeField] private int ItemID; 
