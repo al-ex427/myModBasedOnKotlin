@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Pixelplacement;
+using UnityEngine;
 
-public class CursorControllerScript : MonoBehaviour
+public class CursorControllerScript : Singleton<CursorControllerScript>
 {
     private void Update()
     {
@@ -8,7 +9,6 @@ public class CursorControllerScript : MonoBehaviour
 
     public void LockCursor()
     {
-        return; 
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor(prevent it from moving)
         Cursor.visible = false;
     }

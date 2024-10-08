@@ -3,7 +3,8 @@ guid: c96b44ba99b8847479d1ef52a5903dd9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Lightmap: {fileID: 2800000, guid: 950c016e1d8beba44b06c6d097c76351, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

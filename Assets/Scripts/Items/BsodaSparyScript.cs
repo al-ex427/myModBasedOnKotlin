@@ -2,11 +2,16 @@
 
 public class BsodaSparyScript : MonoBehaviour
 {
+    public float speed;
+
+    public float lifeSpan;
+
+    private Rigidbody rb;
     private void Start()
     {
         this.rb = base.GetComponent<Rigidbody>(); //Get the RigidBody
         this.rb.velocity = base.transform.forward * this.speed; //Move forward
-        this.lifeSpan = 30f; //Set the lifespan
+      //  this.lifeSpan = 30f; //Set the lifespan
     }
 
     private void Update()
@@ -19,9 +24,5 @@ public class BsodaSparyScript : MonoBehaviour
         }
     }
 
-    public float speed;
 
-    private float lifeSpan;
-
-    private Rigidbody rb;
 }

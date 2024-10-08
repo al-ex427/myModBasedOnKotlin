@@ -1,10 +1,95 @@
-﻿using System.Collections;
+﻿using KOTLIN.Interactions;
+using System.Collections;
+using System.Net.Security;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
+    public GameControllerScript gc;
+
+    public BaldiScript baldi;
+
+    public DoorScript door;
+
+    public PlaytimeScript playtime;
+
+    public bool gameOver;
+
+    public bool jumpRope;
+
+    public bool sweeping;
+
+    public bool hugging;
+
+    public bool bootsActive;
+
+    public int principalBugFixer;
+
+    public float sweepingFailsave;
+
+    public float fliparoo;
+
+    public float flipaturn;
+
+    private Quaternion playerRotation;
+
+    public Vector3 frozenPosition;
+
+    private bool sensitivityActive;
+
+    private float sensitivity;
+
+    public float mouseSensitivity;
+
+    public float walkSpeed;
+
+    public float runSpeed;
+
+    public float slowSpeed;
+
+    public float maxStamina;
+
+    public float staminaRate;
+
+    public float guilt;
+
+    public float initGuilt;
+
+    private float moveX;
+
+    private float moveZ;
+
+    private Vector3 moveDirection;
+
+    private float playerSpeed;
+
+    public float stamina;
+
+    public CharacterController cc;
+
+    public NavMeshAgent gottaSweep;
+
+    public NavMeshAgent firstPrize;
+
+    public Transform firstPrizeTransform;
+
+    public Slider staminaBar;
+
+    public float db;
+
+    public string guiltType;
+
+    public GameObject jumpRopeScreen;
+
+    public float height;
+
+    public Material blackSky;
+
+    public Canvas hud;
+
+    [SerializeField] private float SmoothValue;
     private void Start()
     {
         //Yeah your on your own for this one
@@ -44,6 +129,7 @@ public class PlayerScript : MonoBehaviour
             this.sweeping = false;
             this.hugging = false;
         }
+       
     }
 
     private void MouseMove()
@@ -132,7 +218,8 @@ public class PlayerScript : MonoBehaviour
         {
             this.stamina += this.staminaRate * Time.deltaTime;
         }
-        this.staminaBar.value = this.stamina / this.maxStamina * 100f;
+        float targetStaminaBarValue = this.stamina / this.maxStamina * 100f;
+        this.staminaBar.value = Mathf.MoveTowards(this.staminaBar.value, targetStaminaBarValue, Time.deltaTime * SmoothValue);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -154,8 +241,6 @@ public class PlayerScript : MonoBehaviour
         while (this.gameOver)
         {
             this.hud.enabled = false;
-            this.mobile1.enabled = false;
-            this.mobile2.enabled = false;
             this.jumpRopeScreen.SetActive(false);
             yield return new WaitForEndOfFrame();
         }
@@ -240,89 +325,4 @@ public class PlayerScript : MonoBehaviour
         yield break;
     }
 
-    public GameControllerScript gc;
-
-    public BaldiScript baldi;
-
-    public DoorScript door;
-
-    public PlaytimeScript playtime;
-
-    public bool gameOver;
-
-    public bool jumpRope;
-
-    public bool sweeping;
-
-    public bool hugging;
-
-    public bool bootsActive;
-
-    public int principalBugFixer;
-
-    public float sweepingFailsave;
-
-    public float fliparoo;
-
-    public float flipaturn;
-
-    private Quaternion playerRotation;
-
-    public Vector3 frozenPosition;
-
-    private bool sensitivityActive;
-
-    private float sensitivity;
-
-    public float mouseSensitivity;
-
-    public float walkSpeed;
-
-    public float runSpeed;
-
-    public float slowSpeed;
-
-    public float maxStamina;
-
-    public float staminaRate;
-
-    public float guilt;
-
-    public float initGuilt;
-
-    private float moveX;
-
-    private float moveZ;
-
-    private Vector3 moveDirection;
-
-    private float playerSpeed;
-
-    public float stamina;
-
-    public CharacterController cc;
-
-    public NavMeshAgent gottaSweep;
-
-    public NavMeshAgent firstPrize;
-
-    public Transform firstPrizeTransform;
-
-    public Slider staminaBar;
-
-    public float db;
-
-    public string guiltType;
-
-    public GameObject jumpRopeScreen;
-
-    public float height;
-
-    public Material blackSky;
-
-    public Canvas hud;
-
-    public Canvas mobile1;
-
-    public Canvas mobile2;
 }

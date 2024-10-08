@@ -255,12 +255,7 @@ public class MathGameScript : MonoBehaviour
 
     public void CheckAnswer()
     {
-        if (this.playerAnswer.text == "31718")
-        {
-            base.StartCoroutine(this.CheatText(TranslationManager.Instance.GetTranslationString("Minigame_MathGame_AllBegan")));
-            SceneManager.LoadSceneAsync("TestRoom");
-        }
-        else if (this.playerAnswer.text == "53045009")
+        if (this.playerAnswer.text == "53045009")
         {
             base.StartCoroutine(this.CheatText(TranslationManager.Instance.GetTranslationString("Minigame_MathGame_StickCeiling")));
             this.gc.Fliparoo();

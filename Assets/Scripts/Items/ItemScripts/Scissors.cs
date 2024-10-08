@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scissors : MonoBehaviour
+public class Scissors : Item
 {
-    public void OnUse()
+    public override void OnUse()
     {
         Ray ray6 = Camera.main.ScreenPointToRay(new Vector3((float)(Screen.width / 2), (float)(Screen.height / 2), 0f));
         RaycastHit raycastHit6;

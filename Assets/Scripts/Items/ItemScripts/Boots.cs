@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boots : MonoBehaviour
+public class DietBSODA : Item
 {
-    public void OnUse()
+    public override void OnUse()
     {
-        base.StartCoroutine(GameControllerScript.Instance.BootAnimation());
-        GameControllerScript.Instance.player.ActivateBoots();
+        UnityEngine.Object.Instantiate<GameObject>(GameControllerScript.Instance.bsodaSpray, GameControllerScript.Instance.playerTransform.position, GameControllerScript.Instance.cameraTransform.rotation);
         ItemManager.Instance.ResetItem();
+        GameControllerScript.Instance.player.ResetGuilt("drink", 1f);
+        GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.aud_Soda);
     }
 }

@@ -3,6 +3,47 @@ using UnityEngine;
 
 public class DoorScript : KOTLIN.Interactions.Interactable
 {
+    public float openingDistance;
+
+    public Transform player;
+
+    public BaldiScript baldi;
+
+    public MeshCollider barrier;
+
+    public MeshCollider trigger;
+
+    public MeshCollider invisibleBarrier;
+
+    public MeshRenderer inside;
+
+    public MeshRenderer outside;
+
+    public AudioClip doorOpen;
+
+    public AudioClip doorClose;
+
+    public AudioClip doorLock;
+
+    public AudioClip doorUnlock;
+
+    public AudioClip doorLocked;
+
+    public Material closed;
+
+    public Material open;
+
+    private bool bDoorOpen;
+
+    private bool bDoorLocked;
+
+    public int silentOpens;
+
+    private float openTime;
+
+    public float lockTime;
+
+    private AudioSource myAudio;
     private void Start()
     {
         this.myAudio = base.GetComponent<AudioSource>();
@@ -34,7 +75,9 @@ public class DoorScript : KOTLIN.Interactions.Interactable
             this.outside.material = this.closed; // Change the other side of the door to the closed material
             if (this.silentOpens <= 0) //If the door isn't silent
             {
+
                 this.myAudio.PlayOneShot(this.doorClose, 1f); //Play the door close sound
+                SubtitleManager.Instance.CreateSubtitleTranslated(SubtitleType.ThreeD, "SLAM", this.doorClose.length, false, Color.white, myAudio, transform);
             }
         }
     }
@@ -46,7 +89,7 @@ public class DoorScript : KOTLIN.Interactions.Interactable
             this.baldi.Hear(base.transform.position, 1f); //If the door isn't silent, Baldi hears the door with a priority of 1.
         }
         this.OpenDoor();
-        SubtitleManager.Instance.CreateSubtitleTranslated(SubtitleType.ThreeD, "World_DoorOpen", 3, false, Color.blue, myAudio, transform);
+        
         if (this.silentOpens > 0) //If the door is silent
         {
             this.silentOpens--; //Decrease the amount of opens the door will stay quite for.
@@ -58,6 +101,7 @@ public class DoorScript : KOTLIN.Interactions.Interactable
         if (this.silentOpens <= 0 && !this.bDoorOpen) //Play the door sound if the door isn't silent
         {
             this.myAudio.PlayOneShot(this.doorOpen, 1f);
+            SubtitleManager.Instance.CreateSubtitleTranslated(SubtitleType.ThreeD, "World_DoorOpen", this.doorOpen.length, false, Color.white, myAudio, transform);
         }
         this.barrier.enabled = false; //Disable the Barrier
         this.invisibleBarrier.enabled = false;//Disable the invisible Barrier
@@ -79,11 +123,15 @@ public class DoorScript : KOTLIN.Interactions.Interactable
     {
         this.bDoorLocked = true;
         this.lockTime = time;
+        this.myAudio.PlayOneShot(this.doorLock, 1f); //Play the door lock sound
+        SubtitleManager.Instance.CreateSubtitleTranslated(SubtitleType.ThreeD, "World_DoorLock", this.doorLock.length, false, Color.white, myAudio, transform);
     }
 
     public void UnlockDoor() //Unlock the door
     {
         this.bDoorLocked = false;
+        this.myAudio.PlayOneShot(this.doorUnlock, 1f); //Play the door unlock sound
+        SubtitleManager.Instance.CreateSubtitleTranslated(SubtitleType.ThreeD, "World_DoorUnlock", this.doorUnlock.length, false, Color.white, myAudio, transform);
     }
 
     public bool DoorLocked
@@ -99,39 +147,4 @@ public class DoorScript : KOTLIN.Interactions.Interactable
         this.silentOpens = 4;
     }
 
-    public float openingDistance;
-
-    public Transform player;
-
-    public BaldiScript baldi;
-
-    public MeshCollider barrier;
-
-    public MeshCollider trigger;
-
-    public MeshCollider invisibleBarrier;
-
-    public MeshRenderer inside;
-
-    public MeshRenderer outside;
-
-    public AudioClip doorOpen;
-
-    public AudioClip doorClose;
-
-    public Material closed;
-
-    public Material open;
-
-    private bool bDoorOpen;
-
-    private bool bDoorLocked;
-
-    public int silentOpens;
-
-    private float openTime;
-
-    public float lockTime;
-
-    private AudioSource myAudio;
 }

@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BSODA : MonoBehaviour
+public class BSODA : Item
 {
-    public void OnUse()
+    public override void OnUse()
     {
         UnityEngine.Object.Instantiate<GameObject>(GameControllerScript.Instance.bsodaSpray, GameControllerScript.Instance.playerTransform.position, GameControllerScript.Instance.cameraTransform.rotation);
         ItemManager.Instance.ResetItem();
@@ -13,3 +13,4 @@ public class BSODA : MonoBehaviour
         GameControllerScript.Instance.audioDevice.PlayOneShot(GameControllerScript.Instance.aud_Soda);
     }
 }
+ 

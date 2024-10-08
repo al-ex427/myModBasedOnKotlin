@@ -1,48 +1,65 @@
-﻿using MaterialKit;
+using Pixelplacement;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UiManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    private void Start()
+    [Header("Data")]
+
+    [Header("Notebook")]
+
+    [SerializeField] private AudioClip aud_CollectNotebook;
+
+    [SerializeField] private TMP_Text notebookCount;
+
+    [SerializeField] private Animator notebookImg;
+
+    [Header("Reticle")]
+
+    [SerializeField] private Image reticle;
+
+    [SerializeField] private Sprite rectOn;
+
+    [SerializeField] private Sprite rectOff;
+
+    [Header("Animators")]
+
+    [SerializeField] private Animator animator;
+
+
+    public void UpdateNotebookCount(int notebooks, int maxNotebooks)
     {
-        int @int = PlayerPrefs.GetInt("UiSize");
-        int int2 = PlayerPrefs.GetInt("UiHeight");
-        if (@int == 1)
+        this.notebookImg.Play("NotebookSpin", -1, 0f);
+        Singleton<GameControllerScript>.Instance.audioDevice.PlayOneShot(this.aud_CollectNotebook);
+        this.notebookCount.text = notebooks.ToString() + $"/{maxNotebooks}";
+       
+    }
+
+    public void UpdateReticle(bool clickable)
+    {
+        if (clickable)
         {
-            this.normScaler.referenceResolution = new Vector2(640f, 480f);
+            reticle.sprite = rectOn;
         }
-        else if (@int == 2)
+        else if (!clickable)
         {
-            this.normScaler.referenceResolution = new Vector2(800f, 600f);
-        }
-        else if (@int == 3)
-        {
-            this.normScaler.referenceResolution = new Vector2(900f, 720f);
-        }
-        else if (@int == 4)
-        {
-            this.normScaler.referenceResolution = new Vector2(1024f, 720f);
-        }
-        if (int2 == 1)
-        {
-            foreach (RectTransform rectTransform in this.transforms)
-            {
-                rectTransform.position = new Vector3(rectTransform.position.x, rectTransform.position.y + (float)(Screen.height / 8), rectTransform.position.z);
-            }
-        }
-        else if (int2 == 2)
-        {
-            foreach (RectTransform rectTransform2 in this.transforms)
-            {
-                rectTransform2.position = new Vector3(rectTransform2.position.x, rectTransform2.position.y + (float)(Screen.height / 4), rectTransform2.position.z);
-            }
+            reticle.sprite = rectOff;
         }
     }
 
-    public CanvasScaler normScaler;
+    public void ActivateBaldicator(bool heard)
+    {
+        if (heard)
+        {
+            animator.Play("Baldicator_Look", -1, 0f);
+        }
+        else
+        {
+            animator.Play("Baldicator_Think", -1, 0f);
+        }
+    }
 
-    public DpCanvasScaler dpiScaler;
-
-    public RectTransform[] transforms;
 }

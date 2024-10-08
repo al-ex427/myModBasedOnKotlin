@@ -115,6 +115,31 @@ PrefabInstance:
       propertyPath: closed
       value: 
       objectReference: {fileID: 2100000, guid: d5ecd03cdd086ad4890dda169450dcfa, type: 2}
+    - target: {fileID: 8213483388887362353, guid: 958fcb4d466528043ab3ed258bdafe58,
+        type: 3}
+      propertyPath: doorLock
+      value: 
+      objectReference: {fileID: 8300000, guid: 51913ab5995185b4fb33d1f4a6919784, type: 3}
+    - target: {fileID: 8213483388887362353, guid: 958fcb4d466528043ab3ed258bdafe58,
+        type: 3}
+      propertyPath: doorOpen
+      value: 
+      objectReference: {fileID: 8300000, guid: 14939ab423b8be54fac2cf4502541307, type: 3}
+    - target: {fileID: 8213483388887362353, guid: 958fcb4d466528043ab3ed258bdafe58,
+        type: 3}
+      propertyPath: doorClose
+      value: 
+      objectReference: {fileID: 8300000, guid: b0c6fc5341fe85b4ab2d9f6a89ddddda, type: 3}
+    - target: {fileID: 8213483388887362353, guid: 958fcb4d466528043ab3ed258bdafe58,
+        type: 3}
+      propertyPath: doorLocked
+      value: 
+      objectReference: {fileID: 8300000, guid: 1feb5cd96a9a86549ac4242796eeaa47, type: 3}
+    - target: {fileID: 8213483388887362353, guid: 958fcb4d466528043ab3ed258bdafe58,
+        type: 3}
+      propertyPath: doorUnlock
+      value: 
+      objectReference: {fileID: 8300000, guid: 84a93761910171f4ab3a61211d5d022e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

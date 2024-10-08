@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Pixelplacement;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ public class UIController : MonoBehaviour
     {
         if (this.unlockOnStart & !this.joystickEnabled)
         {
-            this.cc.UnlockCursor();
+            Singleton<CursorControllerScript>.Instance.UnlockCursor();
         }
     }
 
@@ -36,7 +37,7 @@ public class UIController : MonoBehaviour
             this.joystickEnabled = true;
             if (this.controlMouse)
             {
-                this.cc.LockCursor();
+                Singleton<CursorControllerScript>.Instance.LockCursor();
             }
         }
         else if (this.joystickEnabled & !usingJoystick)
@@ -44,7 +45,7 @@ public class UIController : MonoBehaviour
             this.joystickEnabled = false;
             if (this.controlMouse)
             {
-                this.cc.UnlockCursor();
+                Singleton<CursorControllerScript>.Instance.UnlockCursor();
             }
         }
         this.UIUpdate();
@@ -83,8 +84,6 @@ public class UIController : MonoBehaviour
     {
         this.dummyButtonPC.Select();
     }
-
-    public CursorControllerScript cc;
 
     private bool joystickEnabled;
 

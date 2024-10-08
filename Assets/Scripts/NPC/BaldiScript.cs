@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Pixelplacement;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class BaldiScript : MonoBehaviour
@@ -137,10 +138,20 @@ public class BaldiScript : MonoBehaviour
 
     public void Hear(Vector3 soundLocation, float priority)
     {
-        if (!this.antiHearing && priority >= this.currentPriority) //If anti-hearing is not active and the priority is greater then the priority of the current sound
         {
-            this.agent.SetDestination(soundLocation); //Go to that sound
-            this.currentPriority = priority; //Set the current priority to the priority
+            if (!this.antiHearing && priority >= this.currentPriority)//If anti-hearing is not active and the priority is greater then the priority of the current sound
+            {
+                this.agent.SetDestination(soundLocation);//Go to that sound
+
+                this.currentPriority = priority;//Set the current priority to the priority
+
+               Singleton<UIManager>.Instance.ActivateBaldicator(heard: true);
+            }
+            else
+            {
+                Singleton<UIManager>.Instance.ActivateBaldicator(heard: false);
+            }
+
         }
     }
 

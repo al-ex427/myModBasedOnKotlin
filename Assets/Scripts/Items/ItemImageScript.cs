@@ -8,29 +8,29 @@ public class ItemImageScript : MonoBehaviour
     {
         if (this.gs != null)
         {
-            Texture texture = ItemManager.Instance.itemSlot[ItemManager.Instance.itemSelected].texture;
-            if (texture == this.blankSprite)
+            Sprite sprite = ItemManager.Instance.itemSlot[ItemManager.Instance.itemSelected].sprite;
+            if (sprite == this.blankSprite)
             {
-                this.sprite.texture = this.noItemSprite;
+                this.sprite.sprite = this.noItemSprite;
             }
             else
             {
-                this.sprite.texture = texture;
+                this.sprite.sprite = sprite;
             }
         }
         else
         {
-            this.sprite.texture = this.noItemSprite;
+            this.sprite.sprite = this.noItemSprite;
         }
     }
 
-    public RawImage sprite;
+    public Image sprite;
 
     [SerializeField]
-    private Texture noItemSprite;
+    private Sprite noItemSprite;
 
     [SerializeField]
-    private Texture blankSprite;
+    private Sprite blankSprite;
 
     public GameControllerScript gs;
 }

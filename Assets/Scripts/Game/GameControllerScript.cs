@@ -12,13 +12,129 @@ using KOTLIN.Translation;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using KOTLIN.Items;
+using FluidMidi;
 public class GameControllerScript : Singleton<GameControllerScript>
 {
-	private List<EntranceScript> entrances = new List<EntranceScript>(); //
+
+    [SerializeField] private ItemManager itemManager;
+    public int MaxNotebooks;
+
+    [Space()]
+    public PlayerScript player;
+
+    public Transform playerTransform;
+
+    public Transform cameraTransform;
+
+    public new Camera camera;
+
+    private int cullingMask;
+
+    public GameObject baldiTutor;
+
+    public GameObject baldi;
+
+    public BaldiScript baldiScrpt;
+
+    public AudioClip aud_Prize;
+
+    public AudioClip aud_PrizeMobile;
+
+    public AudioClip aud_AllNotebooks;
+
+    public GameObject principal;
+
+    public GameObject crafters;
+
+    public GameObject playtime;
+
+    public PlaytimeScript playtimeScript;
+
+    public GameObject gottaSweep;
+
+    public GameObject bully;
+
+    public GameObject firstPrize;
+
+    public GameObject TestEnemy;
+
+    public FirstPrizeScript firstPrizeScript;
+
+    public GameObject quarter;
+
+    public AudioSource tutorBaldi;
+
+    public RectTransform boots;
+
+    public string mode;
+
+    public int notebooks;
+
+    public GameObject[] notebookPickups;
+
+    public int failedNotebooks;
+
+    public bool spoopMode, finaleMode;
+
+    public bool debugMode;
+
+    public bool mouseLocked;
+
+    public int exitsReached;
+
+    public int itemSelected;
+
+    public GameObject bsodaSpray;
+
+    public GameObject alarmClock;
+
+    public GameObject pauseMenu;
+
+    public GameObject highScoreText;
+
+    [HideInInspector] public bool gamePaused;
+
+    [HideInInspector] public bool learningActive;
+
+    private float gameOverDelay;
+
+    [HideInInspector] public AudioSource audioDevice;
+
+    public AudioClip aud_Soda;
+
+    public AudioClip aud_Spray;
+
+    public AudioClip aud_buzz;
+
+    public AudioClip aud_Hang;
+
+    [SerializeField] private AudioClip aud_MachineQuiet;
+    [SerializeField] private AudioClip aud_MachineStart;
+    [SerializeField] private AudioClip aud_MachineRev;
+	[SerializeField] private AudioClip aud_MachineLoop;
+
+    public AudioClip aud_Switch;
+
+    public SongPlayer schoolMusic;
+
+	public SongPlayer endMusic;
+
+  //  public SongPlayer learnMusic;
+
+	[Header("Extra")]
+
+	[SerializeField] private Cubemap Sky;
+
+    [SerializeField] private Color SkyCol;
+
+    //private Player playerInput;
+    private List<EntranceScript> entrances = new List<EntranceScript>(); //
     [Obsolete]
 	private void Start()
 	{
-		this.cullingMask = this.camera.cullingMask; // Changes cullingMask in the Camera
+        Shader.SetGlobalTexture("_Skybox", Sky);
+        Shader.SetGlobalColor("_SkyboxColor", SkyCol);
+        this.cullingMask = this.camera.cullingMask; // Changes cullingMask in the Camera
 		this.audioDevice = base.GetComponent<AudioSource>(); //Get the Audio Source
 		this.mode = PlayerPrefs.GetString("CurrentMode"); //Get the current mode
 		if (this.mode == "endless") //If it is endless mode
@@ -27,8 +143,9 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		}
 		this.schoolMusic.Play(); //Play the school music
 		this.LockMouse(); //Prevent the mouse from moving
-		this.UpdateNotebookCount(); //Update the notebook count
-		this.itemSelected = 0; //Set selection to item slot 0(the first item slot)
+                          //Update the notebook count
+            Singleton<UIManager>.Instance.UpdateNotebookCount(notebooks, MaxNotebooks);
+        this.itemSelected = 0; //Set selection to item slot 0(the first item slot)
 		this.gameOverDelay = 0.5f;
 
 		foreach (EntranceScript entrance in FindObjectsOfTypeAll(typeof(EntranceScript))) //typeall for 2019 support (ew)
@@ -88,14 +205,6 @@ public class GameControllerScript : Singleton<GameControllerScript>
 				Time.timeScale = 0f;
 			}
 		}
-		if (this.player.stamina < 0f & !this.warning.activeSelf)
-		{
-			this.warning.SetActive(true); //Set the warning text to be visible
-		}
-		else if (this.player.stamina > 0f & this.warning.activeSelf)
-		{
-			this.warning.SetActive(false); //Set the warning text to be invisible
-		}
 		if (this.player.gameOver)
 		{
 			if (this.mode == "endless" && this.notebooks > PlayerPrefs.GetInt("HighBooks") && !this.highScoreText.activeSelf)
@@ -121,7 +230,7 @@ public class GameControllerScript : Singleton<GameControllerScript>
 					PlayerPrefs.SetInt("CurrentBooks", this.notebooks);
 				}
 				Time.timeScale = 1f;
-				SceneManager.LoadScene("GameOver");
+				SceneManager.LoadScene("MainMenu");
 			}
 		}
 		if (this.finaleMode && !this.audioDevice.isPlaying && this.exitsReached == 3)
@@ -130,45 +239,35 @@ public class GameControllerScript : Singleton<GameControllerScript>
 			this.audioDevice.loop = true;
 			this.audioDevice.Play();
 		}
-	}
 
-	private void UpdateNotebookCount()
-	{
-		if (this.mode == "story")
-		{
-			this.notebookCount.text = this.notebooks.ToString() + $"/{MaxNotebooks} {TranslationManager.Instance.GetTranslationString("Notebooks")}";
-		}
-		else
-		{
-			this.notebookCount.text = this.notebooks.ToString() + TranslationManager.Instance.GetTranslationString("Notebooks");
-		}
-		if (this.notebooks == MaxNotebooks & this.mode == "story")
-		{
-			this.ActivateFinaleMode();
-		}
-	}
+        if (this.notebooks == MaxNotebooks & this.mode == "story")
+        {
+            this.ActivateFinaleMode();
+        }
+    }
 
-	public void CollectNotebook()
+	
+
+	public void CollectNotebook(int notes)
 	{
-		this.notebooks++;
-		this.UpdateNotebookCount();
-	}
+		this.notebooks += notes;
+		Singleton<UIManager>.Instance.UpdateNotebookCount(notebooks, Mathf.Max(MaxNotebooks, notebooks));
+
+    }
 
 	public void LockMouse()
 	{
 		if (!this.learningActive)
 		{
-			this.cursorController.LockCursor(); //Prevent the cursor from moving
+			Singleton<CursorControllerScript>.Instance.LockCursor(); //Prevent the cursor from moving
 			this.mouseLocked = true;
-			this.reticle.SetActive(true);
 		}
 	}
 
 	public void UnlockMouse()
 	{
-		this.cursorController.UnlockCursor(); //Allow the cursor to move
+        Singleton<CursorControllerScript>.Instance.UnlockCursor(); //Allow the cursor to move
 		this.mouseLocked = false;
-		this.reticle.SetActive(false);
 	}
 
 	public void PauseGame()
@@ -178,12 +277,13 @@ public class GameControllerScript : Singleton<GameControllerScript>
 			{
 				this.UnlockMouse();
 			}
+			SongPlayer.PauseAll();
 			Time.timeScale = 0f;
 			this.gamePaused = true;
 			this.pauseMenu.SetActive(true);
+			
 		}
 	}
-
 	public void ExitGame()
 	{
 		SceneManager.LoadScene("MainMenu");
@@ -193,7 +293,8 @@ public class GameControllerScript : Singleton<GameControllerScript>
 	{
 		Time.timeScale = 1f;
 		this.gamePaused = false;
-		this.pauseMenu.SetActive(false);
+        SongPlayer.ResumeAll();
+        this.pauseMenu.SetActive(false);
 		this.LockMouse();
 	}
 
@@ -214,7 +315,7 @@ public class GameControllerScript : Singleton<GameControllerScript>
         this.firstPrize.SetActive(true); //Turns on First-Prize
 		//this.TestEnemy.SetActive(true); //Turns on Test-Enemy
 		this.audioDevice.PlayOneShot(this.aud_Hang); //Plays the hang sound
-		this.learnMusic.Stop(); //Stop all the music
+		//this.learnMusic.Stop(); //Stop all the music
 		this.schoolMusic.Stop();
 	}
 
@@ -245,7 +346,7 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		if (!this.spoopMode) //If the player hasn't gotten a question wrong
 		{
 			this.schoolMusic.Stop(); //Start playing the learn music
-			this.learnMusic.Play();
+			//this.learnMusic.Play();
 		}
 	}
 
@@ -262,7 +363,7 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		if (!this.spoopMode) //If it isn't spoop mode, play the school music
 		{
 			this.schoolMusic.Play();
-			this.learnMusic.Stop();
+			//this.learnMusic.Stop();
 		}
 		if (this.notebooks == 1 & !this.spoopMode) // If this is the players first notebook and they didn't get any questions wrong, reward them with a quarter
 		{
@@ -272,6 +373,7 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		else if (this.notebooks == MaxNotebooks & this.mode == "story") // Plays the all 7 notebook sound
 		{
 			this.audioDevice.PlayOneShot(this.aud_AllNotebooks, 0.8f);
+			this.endMusic.Play();
 		}
 	}
 
@@ -324,7 +426,7 @@ public class GameControllerScript : Singleton<GameControllerScript>
 			RenderSettings.ambientLight = Color.red; //Make everything red and start player the weird sound
 			//RenderSettings.fog = true;
 			this.audioDevice.PlayOneShot(this.aud_Switch, 0.8f);
-			this.audioDevice.clip = this.aud_MachineQuiet;
+			endMusic.Tempo = 0.1f;
 			this.audioDevice.loop = true;
 			this.audioDevice.Play();
 		}
@@ -356,121 +458,4 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		Camera.main.GetComponent<CameraScript>().offset = new Vector3(0f, -1f, 0f);
 	}
 
-	[SerializeField] private ItemManager itemManager;
-	public int MaxNotebooks;
-
-	[Space()]
-	public CursorControllerScript cursorController;
-
-	public PlayerScript player;
-
-	public Transform playerTransform;
-
-	public Transform cameraTransform;
-
-	public new Camera camera;
-
-	private int cullingMask;
-
-	public GameObject baldiTutor;
-
-	public GameObject baldi;
-
-	public BaldiScript baldiScrpt;
-
-	public AudioClip aud_Prize;
-
-	public AudioClip aud_PrizeMobile;
-
-	public AudioClip aud_AllNotebooks;
-
-	public GameObject principal;
-
-	public GameObject crafters;
-
-	public GameObject playtime;
-
-	public PlaytimeScript playtimeScript;
-
-	public GameObject gottaSweep;
-
-	public GameObject bully;
-
-	public GameObject firstPrize;
-
-	public GameObject TestEnemy;
-
-	public FirstPrizeScript firstPrizeScript;
-
-	public GameObject quarter;
-
-	public AudioSource tutorBaldi;
-
-	public RectTransform boots;
-
-	public string mode;
-
-	public int notebooks;
-
-	public GameObject[] notebookPickups;
-
-	public int failedNotebooks;
-
-	public bool spoopMode;
-
-	public bool finaleMode;
-
-	public bool debugMode;
-
-	public bool mouseLocked;
-
-	public int exitsReached;
-
-	public int itemSelected;
-
-	public GameObject bsodaSpray;
-
-	public GameObject alarmClock;
-
-	public TMP_Text notebookCount;
-
-	public GameObject pauseMenu;
-
-	public GameObject highScoreText;
-
-	public GameObject warning;
-
-	public GameObject reticle;
-
-	private bool gamePaused;
-
-	private bool learningActive;
-
-	private float gameOverDelay;
-
-	[HideInInspector] public AudioSource audioDevice;
-
-	public AudioClip aud_Soda;
-
-	public AudioClip aud_Spray;
-
-	public AudioClip aud_buzz;
-
-	public AudioClip aud_Hang;
-
-	public AudioClip aud_MachineQuiet;
-
-	public AudioClip aud_MachineStart;
-
-	public AudioClip aud_MachineRev;
-
-	public AudioClip aud_MachineLoop;
-
-	public AudioClip aud_Switch;
-
-	public AudioSource schoolMusic;
-
-	public AudioSource learnMusic;
-
-	//private Player playerInput;
 }

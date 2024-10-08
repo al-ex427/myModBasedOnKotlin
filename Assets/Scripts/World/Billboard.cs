@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 // This script is licensed under a Creative Commons Attribution 4.0 International License.
@@ -55,8 +55,8 @@ public class Billboard : MonoBehaviour
         if (cam == null)
         {
             transform.localEulerAngles = Vector3.zero;
-            return; 
-        } 
+            return;
+        }
 
         if (billboardX)
             transform.rotation = Quaternion.Euler(cam.transform.rotation.eulerAngles.x,

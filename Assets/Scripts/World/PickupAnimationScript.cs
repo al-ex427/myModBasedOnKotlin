@@ -72,7 +72,7 @@ public class PickupAnimationScript : MonoBehaviour
         if (transform != null) //Fix errors when opening Unity 
         {
             transform.localPosition = Vector3.up *
-                              (MathF.Sin(Time.time * 2) * amplitude + centerY);
+                              (MathF.Sin(Time.time * 4) * amplitude + centerY);
         }
     }
 }

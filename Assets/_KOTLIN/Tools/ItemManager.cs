@@ -1,4 +1,5 @@
 using KOTLIN.Items;
+using KOTLIN.Items.Custom;
 using KOTLIN.Translation;
 using Pixelplacement;
 using System;
@@ -13,33 +14,24 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 namespace KOTLIN.Items
 {
-    #region Item Struct
-    [System.Serializable]
-    public struct Item
-    {
-        public string NameKey;
-        public Texture ItemSprite;
-
-        [Header("Events")]
-        public UnityEvent OnUse;
-        public UnityEvent OnPickup;
-
-        [Space()]
-        public UnityEvent OnSelect;
-        public UnityEvent OnDeselect; 
-    }
-    #endregion
-
     public class ItemManager : Singleton<ItemManager>
     {
         #region Variables
+
         public int itemSelected;
-        public Item[] items;
+        public ItemObject[] items;
         public int[] item = new int[0];
+
         private int[] itemSelectOffset;
-        public RawImage[] itemSlot = new RawImage[3];
+
+        public Image[] itemSlot = new Image[5];
+        public RawImage[] itemSlotBG = new RawImage[5];
+
         public KeyCode[] numericKeys = { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9 };
-        [SerializeField] private RectTransform itemSelect;
+
+        //[SerializeField] private RectTransform itemSelect;
+        [SerializeField] private AudioClip audOnClick;
+
         [SerializeField] private TMP_Text itemText;
         #endregion
 
@@ -53,6 +45,7 @@ namespace KOTLIN.Items
             }
 
             Array.Resize(ref item, itemSlot.Length);
+            Array.Resize(ref itemSlot, itemSlotBG.Length);
             Array.Resize(ref numericKeys, array.Length);
             this.itemSelectOffset = array;
         }
@@ -74,11 +67,11 @@ namespace KOTLIN.Items
                     int itemId = item[i];
                     if (itemId >= 0 && itemId < items.Length)
                     {
-                        itemSlot[i].texture = items[itemId].ItemSprite;
+                        itemSlot[i].sprite = items[itemId].ItemSpriteSmall;
                     }
                     else
                     {
-                        itemSlot[i].texture = null;
+                        itemSlot[i].sprite = null;
                     }
                 }
                 UpdateItemSelection();
@@ -128,29 +121,31 @@ namespace KOTLIN.Items
         #region Item Selection
         private void IncreaseItemSelection()
         {
-            items[item[itemSelected]].OnDeselect?.Invoke();
+            items[item[itemSelected]].Happen.onDeselected?.Invoke();
             this.itemSelected++;
             if (this.itemSelected > itemSlot.Length - 1)
             {
                 this.itemSelected = 0;
             }
 
-            items[item[itemSelected]].OnSelect?.Invoke();
-            this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], itemSelect.anchoredPosition.y, 0f); //Moves the item selector background(the red rectangle)
+            items[item[itemSelected]].Happen.onSelected?.Invoke();
+            this.UpdateItemSelection();
+            //    this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], itemSelect.anchoredPosition.y, 0f); //Moves the item selector background(the red rectangle)
             this.UpdateItemName();
         }
 
         private void DecreaseItemSelection()
         {
-            items[item[itemSelected]].OnDeselect?.Invoke();
+            items[item[itemSelected]].Happen.onDeselected?.Invoke();
             this.itemSelected--;
             if (this.itemSelected < 0)
             {
                 this.itemSelected = itemSlot.Length - 1;
             }
 
-            items[item[itemSelected]].OnSelect?.Invoke();
-            this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], itemSelect.anchoredPosition.y, 0f); //Moves the item selector background(the red rectangle)
+            items[item[itemSelected]].Happen.onSelected?.Invoke();
+            this.UpdateItemSelection();
+           // this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], itemSelect.anchoredPosition.y, 0f); //Moves the item selector background(the red rectangle)
             this.UpdateItemName();
         }
         #endregion
@@ -158,7 +153,8 @@ namespace KOTLIN.Items
         #region Item Collection & Use
         public void CollectItem(int item_ID)
         {
-            int emptySlotIndex = -1;
+            Singleton<GameControllerScript>.Instance.audioDevice.PlayOneShot(audOnClick);
+            int emptySlotIndex = 0;
             for (int i = 0; i < this.item.Length; i++)
             {
                 if (this.item[i] == 0)
@@ -171,9 +167,9 @@ namespace KOTLIN.Items
             int slotIndex = emptySlotIndex != -1 ? emptySlotIndex : this.itemSelected;
 
             this.item[slotIndex] = item_ID;
-            this.itemSlot[slotIndex].texture = items[item_ID].ItemSprite;
+            this.itemSlot[slotIndex].sprite = items[item_ID].ItemSpriteSmall;
 
-            items[this.item[itemSelected]].OnPickup?.Invoke();
+            items[this.item[itemSelected]].Happen.onPickup?.Invoke();
             this.UpdateItemName();
         }
 
@@ -181,7 +177,8 @@ namespace KOTLIN.Items
         {
             if (this.item[this.itemSelected] != 0)
             {
-                items[this.item[itemSelected]].OnUse?.Invoke();
+                items[this.item[itemSelected]].Happen.onUse?.Invoke();
+                items[this.item[itemSelected]].ITMScript.OnUse();
             }
         }
         #endregion
@@ -190,14 +187,14 @@ namespace KOTLIN.Items
         public void ResetItem()
         {
             this.item[this.itemSelected] = 0;
-            this.itemSlot[this.itemSelected].texture = items[0].ItemSprite;
+            this.itemSlot[this.itemSelected].sprite = items[0].ItemSpriteSmall;
             this.UpdateItemName();
         }
 
         public void LoseItem(int id)
         {
             this.item[id] = 0;
-            this.itemSlot[id].texture = items[0].ItemSprite;
+            this.itemSlot[id].sprite = items[0].ItemSpriteSmall;
             this.UpdateItemName();
         }
         #endregion
@@ -205,26 +202,38 @@ namespace KOTLIN.Items
         #region Item Info Updates
         public void UpdateItemSelection()
         {
-            this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], itemSelect.anchoredPosition.y, 0f); //Moves the item selector background(the red rectangle)
+            for (int i = 0; i < this.itemSlotBG.Length; i++)
+            {
+                if (this.itemSlotBG[i] != this.itemSlotBG[this.itemSelected])
+                {
+                    this.itemSlotBG[i].color = new Color(1f, 1f, 1f, 1f);
+                }
+                else
+                {
+                    this.itemSlotBG[i].color = new Color(1f, 0f, 0f, 1f);
+                }
+            }
+            //  this.itemSelect.anchoredPosition = new Vector3((float)this.itemSelectOffset[this.itemSelected], itemSelect.anchoredPosition.y, 0f); //Moves the item selector background(the red rectangle)
             this.UpdateItemName();
         }
 
         private void UpdateItemName()
         {
-            this.itemText.text = TranslationManager.Instance.GetTranslationString(items[this.item[this.itemSelected]].NameKey);
+            this.itemText.text = TranslationManager.Instance.GetTranslationString(items[this.item[this.itemSelected]].nameKey);
         }
         #endregion
     }
 }
-#if UNITY_EDITOR
+
+/*#if UNITY_EDITOR
 [CustomEditor(typeof(ItemManager))]
 public class ItemManagerEditor : Editor
 {
     SerializedProperty itemsProp;
     SerializedProperty itemProp;
     SerializedProperty itemSlotProp;
+    SerializedProperty itemSlotBGProp;
     SerializedProperty numericKeysProp;
-    SerializedProperty itemSelectProp;
     SerializedProperty itemTextProp;
 
     private void OnEnable()
@@ -232,8 +241,8 @@ public class ItemManagerEditor : Editor
         itemsProp = serializedObject.FindProperty("items");
         itemProp = serializedObject.FindProperty("item");
         itemSlotProp = serializedObject.FindProperty("itemSlot");
+        itemSlotBGProp = serializedObject.FindProperty("itemSlotBg");
         numericKeysProp = serializedObject.FindProperty("numericKeys");
-        itemSelectProp = serializedObject.FindProperty("itemSelect");
         itemTextProp = serializedObject.FindProperty("itemText");
     }
 
@@ -266,7 +275,7 @@ public class ItemManagerEditor : Editor
         string[] itemNames = new string[itemManager.items.Length];
         for (int i = 0; i < itemManager.items.Length; i++)
         {
-            itemNames[i] = $"{i}: {itemManager.items[i].NameKey}";
+          //  itemNames[i] = $"{i}: {itemManager.items[i].nameKey}";
         }
 
         for (int i = 0; i < itemManager.item.Length; i++)
@@ -291,11 +300,13 @@ public class ItemManagerEditor : Editor
 
         EditorGUILayout.Space(10);
         EditorGUILayout.PropertyField(itemSlotProp, new GUIContent("Item Slots"));
+   //     EditorGUILayout.PropertyField(itemSlotBGProp, new GUIContent("Item Slots BG"));
+        EditorGUILayout.Space(10);
         EditorGUILayout.PropertyField(numericKeysProp, new GUIContent("Numeric Keys"));
-        EditorGUILayout.PropertyField(itemSelectProp, new GUIContent("Item Select"));
+        EditorGUILayout.Space(10);
         EditorGUILayout.PropertyField(itemTextProp, new GUIContent("Item Text"));
 
         EditorGUILayout.EndVertical();
     }
 }
-#endif
+#endif*/

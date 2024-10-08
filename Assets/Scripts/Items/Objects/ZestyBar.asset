@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec080ea81e5f7814da69ad31979409d2, type: 3}
+  m_Name: ZestyBar
+  m_EditorClassIdentifier: 
+  ITMScript: {fileID: 1920630062115219402, guid: cc0a0680052c1aa4895d46dcaa725bf2,
+    type: 3}
+  ItemSpriteBig: {fileID: 21300000, guid: 9f8ce71090fdc4c41b44aea4652dee83, type: 3}
+  ItemSpriteSmall: {fileID: 21300000, guid: fbcf6e13c8d18be4db8054430e4a5110, type: 3}
+  nameKey: ITM_Zesty
+  Happen:
+    onUse:
+      m_PersistentCalls:
+        m_Calls: []
+    onPickup:
+      m_PersistentCalls:
+        m_Calls: []
+    onSelected:
+      m_PersistentCalls:
+        m_Calls: []
+    onDeselected:
+      m_PersistentCalls:
+        m_Calls: []

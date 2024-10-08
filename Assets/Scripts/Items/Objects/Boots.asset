@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec080ea81e5f7814da69ad31979409d2, type: 3}
+  m_Name: Boots
+  m_EditorClassIdentifier: 
+  ITMScript: {fileID: 3717635790189965289, guid: e030ec8ccde7bc840a608dd798e4f01d,
+    type: 3}
+  ItemSpriteBig: {fileID: 21300000, guid: c78efab5d18f26f4c9822692e9ee0bdb, type: 3}
+  ItemSpriteSmall: {fileID: 21300000, guid: 11773dc3488b4684db5027f447ef8b25, type: 3}
+  nameKey: ITM_Boots
+  Happen:
+    onUse:
+      m_PersistentCalls:
+        m_Calls: []
+    onPickup:
+      m_PersistentCalls:
+        m_Calls: []
+    onSelected:
+      m_PersistentCalls:
+        m_Calls: []
+    onDeselected:
+      m_PersistentCalls:
+        m_Calls: []

@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class YellowLock : MonoBehaviour
+public class YellowLock : Item
 {
-    public void OnUse()
+    public override void OnUse()
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3((float)(Screen.width / 2), (float)(Screen.height / 2), 0f));
         RaycastHit raycastHit;

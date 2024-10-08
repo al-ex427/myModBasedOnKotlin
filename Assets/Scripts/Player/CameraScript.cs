@@ -2,6 +2,29 @@
 
 public class CameraScript : MonoBehaviour
 {
+
+    public GameObject player;
+
+    public PlayerScript ps;
+
+    public Transform baldi;
+
+    public float initVelocity;
+
+    public float velocity;
+
+    public float gravity;
+
+    private int lookBehind;
+
+    public Vector3 offset;
+
+    public float jumpHeight;
+
+    public Vector3 jumpHeightV3;
+
+    public float FreecamLookX;
+
     private void Start()
     {
         this.offset = base.transform.position - this.player.transform.position; //Defines the offset
@@ -31,15 +54,16 @@ public class CameraScript : MonoBehaviour
         {
             this.lookBehind = 0; //Don't look behind you
         }
+
     }
 
     private void LateUpdate()
     {
         base.transform.position = this.player.transform.position + this.offset; //Teleport to the player, then move based on the offset vector(if all other statements fail)
-        if (!this.ps.gameOver & !this.ps.jumpRope)
+        if (!this.ps.gameOver & !this.ps.jumpRope & !FindObjectOfType<GameControllerScript>().gamePaused & !FindObjectOfType<GameControllerScript>().learningActive)
         {
             base.transform.position = this.player.transform.position + this.offset; //Teleport to the player, then move based on the offset vector
-            base.transform.rotation = this.player.transform.rotation * Quaternion.Euler(0f, (float)this.lookBehind, 0f); //Rotate based on player direction + lookbehind
+            base.transform.rotation = this.player.transform.rotation * Quaternion.Euler(FreecamLookX, (float)this.lookBehind, 0f); //Rotate based on player direction + lookbehind
         }
         else if (this.ps.gameOver)
         {
@@ -49,27 +73,12 @@ public class CameraScript : MonoBehaviour
         else if (this.ps.jumpRope)
         {
             base.transform.position = this.player.transform.position + this.offset + this.jumpHeightV3; //Apply the jump rope vector onto the normal offset
-            base.transform.rotation = this.player.transform.rotation; //Rotate based on player direction
+            base.transform.rotation = this.player.transform.rotation * Quaternion.Euler(FreecamLookX, (float)this.lookBehind, 0f); //Rotate based on player direction + lookbehind
         }
+
+        float num = Input.GetAxis("Mouse Y") * this.ps.mouseSensitivity;
+        FreecamLookX -= num;
+        FreecamLookX = Mathf.Clamp(FreecamLookX, -90f, 90f);
     }
 
-    public GameObject player;
-
-    public PlayerScript ps;
-
-    public Transform baldi;
-
-    public float initVelocity;
-
-    public float velocity;
-
-    public float gravity;
-
-    private int lookBehind;
-
-    public Vector3 offset;
-
-    public float jumpHeight;
-
-    public Vector3 jumpHeightV3;
 }

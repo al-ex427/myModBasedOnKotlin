@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Pixelplacement;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PauseMenuScript : MonoBehaviour
@@ -7,18 +8,16 @@ public class PauseMenuScript : MonoBehaviour
     {
         if (this.usingJoystick & EventSystem.current.currentSelectedGameObject == null)
         {
-            if (!this.gc.mouseLocked)
+            if (!Singleton<GameControllerScript>.Instance.mouseLocked)
             {
-                this.gc.LockMouse();
+                Singleton<GameControllerScript>.Instance.LockMouse();
             }
         }
-        else if (!this.usingJoystick && this.gc.mouseLocked)
+        else if (!this.usingJoystick && Singleton<GameControllerScript>.Instance.mouseLocked)
         {
-            this.gc.UnlockMouse();
+            Singleton<GameControllerScript>.Instance.UnlockMouse();
         }
     }
-
-    public GameControllerScript gc;
 
     private bool usingJoystick
     {

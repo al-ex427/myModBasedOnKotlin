@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Keys : MonoBehaviour
+public class Keys : Item
 {
-    public void OnUse()
+    public override void OnUse()
     {
         Ray ray2 = Camera.main.ScreenPointToRay(new Vector3((float)(Screen.width / 2), (float)(Screen.height / 2), 0f));
         RaycastHit raycastHit2;

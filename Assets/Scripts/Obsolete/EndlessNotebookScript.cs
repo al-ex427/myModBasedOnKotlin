@@ -17,7 +17,7 @@ public class EndlessNotebookScript : MonoBehaviour
             if (Physics.Raycast(ray, out raycastHit) && (raycastHit.transform.tag == "Notebook" & Vector3.Distance(this.player.position, base.transform.position) < this.openingDistance)) //If it is a notebook
             {
                 base.gameObject.SetActive(false); //Disable the object being clicked
-                this.gc.CollectNotebook(); //Collect the notebook
+                this.gc.CollectNotebook(1); //Collect the notebook
                 this.learningGame.SetActive(true); //Activate the learning game
             }
         }

@@ -81,7 +81,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &119847294259838197
@@ -833,7 +833,7 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &5554775216033462496
@@ -2417,7 +2417,7 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &3381470882441977800
@@ -2672,7 +2672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 2100000, guid: 1148ef3430320474e9d3c5f5d9770059, type: 2}
   wall: {fileID: 5915206794077741270}
-  decompType: 1
+  decompType: 2
 --- !u!114 &5882144216107991490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2685,8 +2685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94a6dedd38e95546b46fa239094be73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  lastType: 1
+  type: 2
+  lastType: 2
 --- !u!1 &8826714035242004852
 GameObject:
   m_ObjectHideFlags: 0

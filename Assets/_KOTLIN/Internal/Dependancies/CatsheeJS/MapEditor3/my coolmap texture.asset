@@ -26,16 +26,16 @@ MonoBehaviour:
     mat: {fileID: 2100000, guid: c816aa729b2626c4db77487f9ef82aa5, type: 2}
   RoomFloorTex:
     name: 
-    mat: {fileID: 2100000, guid: 8f7c1dab8678c924c87938ba1f000b83, type: 2}
+    mat: {fileID: 2100000, guid: 224b95f4bf1ea7a479cd4009ce196714, type: 2}
   RoomWallTex:
     name: 
-    mat: {fileID: 2100000, guid: 65683666e2ac4cd479f3c4ad90174ae4, type: 2}
+    mat: {fileID: 2100000, guid: a30bedd517eca484b88b4f187cd43671, type: 2}
   RoomThinWallTex:
     name: 
     mat: {fileID: 2100000, guid: c4e2f71595897ef46a9e913a26b2140a, type: 2}
   RoomCeilingTex:
     name: 
-    mat: {fileID: 2100000, guid: c816aa729b2626c4db77487f9ef82aa5, type: 2}
+    mat: {fileID: 0}
   floorTextures: []
   wallTextures:
   - name: Window

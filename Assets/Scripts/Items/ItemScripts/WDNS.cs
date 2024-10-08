@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WDNS : MonoBehaviour
+public class WDNS : Item
 {
-    public void OnUse()
+    public override void OnUse()
     {
         Ray ray5 = Camera.main.ScreenPointToRay(new Vector3((float)(Screen.width / 2), (float)(Screen.height / 2), 0f));
         RaycastHit raycastHit5;

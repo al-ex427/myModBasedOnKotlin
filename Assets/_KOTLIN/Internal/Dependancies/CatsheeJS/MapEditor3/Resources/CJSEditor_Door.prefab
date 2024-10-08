@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 7204061643306329376}
   - component: {fileID: 5340115414798514999}
   - component: {fileID: 1931381067607482821}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: _DoorOut
   m_TagString: Door
   m_Icon: {fileID: 0}
@@ -488,6 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e03bb9b92817464d9b3c48091b4270e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InteractDistance: 10
   openingDistance: 15
   player: {fileID: 0}
   baldi: {fileID: 0}
@@ -496,8 +497,11 @@ MonoBehaviour:
   invisibleBarrier: {fileID: 3072771132290555547}
   inside: {fileID: 8464612905684408862}
   outside: {fileID: 7204061643306329376}
-  doorOpen: {fileID: 8300000, guid: e914d94d2c0fcab41ac7bd3aa92b5d90, type: 3}
-  doorClose: {fileID: 8300000, guid: bb8257ffc0517bf468f1fb4d57cfe641, type: 3}
+  doorOpen: {fileID: 8300000, guid: 14939ab423b8be54fac2cf4502541307, type: 3}
+  doorClose: {fileID: 8300000, guid: b0c6fc5341fe85b4ab2d9f6a89ddddda, type: 3}
+  doorLock: {fileID: 8300000, guid: 51913ab5995185b4fb33d1f4a6919784, type: 3}
+  doorUnlock: {fileID: 8300000, guid: 84a93761910171f4ab3a61211d5d022e, type: 3}
+  doorLocked: {fileID: 8300000, guid: 1feb5cd96a9a86549ac4242796eeaa47, type: 3}
   closed: {fileID: 2100000, guid: e55826bab1be604418b6af4fec35d2f0, type: 2}
   open: {fileID: 2100000, guid: f6c8582af20cde3468a747491ae93126, type: 2}
   silentOpens: 0
