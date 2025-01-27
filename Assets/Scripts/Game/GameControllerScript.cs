@@ -76,10 +76,6 @@ public class GameControllerScript : Singleton<GameControllerScript>
 
     public bool spoopMode, finaleMode;
 
-    public bool debugMode;
-
-    public bool mouseLocked;
-
     public int exitsReached;
 
     public int itemSelected;
@@ -142,7 +138,7 @@ public class GameControllerScript : Singleton<GameControllerScript>
 			this.baldiScrpt.endless = true; //Set Baldi use his slightly changed endless anger system
 		}
 		this.schoolMusic.Play(); //Play the school music
-		this.LockMouse(); //Prevent the mouse from moving
+		Singleton<CursorControllerScript>.Instance.LockCursor(); //Prevent the mouse from moving
                           //Update the notebook count
             Singleton<UIManager>.Instance.UpdateNotebookCount(notebooks, MaxNotebooks);
         this.itemSelected = 0; //Set selection to item slot 0(the first item slot)
@@ -255,27 +251,12 @@ public class GameControllerScript : Singleton<GameControllerScript>
 
     }
 
-	public void LockMouse()
-	{
-		if (!this.learningActive)
-		{
-			Singleton<CursorControllerScript>.Instance.LockCursor(); //Prevent the cursor from moving
-			this.mouseLocked = true;
-		}
-	}
-
-	public void UnlockMouse()
-	{
-        Singleton<CursorControllerScript>.Instance.UnlockCursor(); //Allow the cursor to move
-		this.mouseLocked = false;
-	}
-
 	public void PauseGame()
 	{
 		if (!this.learningActive)
 		{
 			{
-				this.UnlockMouse();
+				Singleton<CursorControllerScript>.Instance.UnlockCursor();
 			}
 			SongPlayer.PauseAll();
 			Time.timeScale = 0f;
@@ -295,8 +276,8 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		this.gamePaused = false;
         SongPlayer.ResumeAll();
         this.pauseMenu.SetActive(false);
-		this.LockMouse();
-	}
+        Singleton<CursorControllerScript>.Instance.LockCursor();
+    }
 
 	public void ActivateSpoopMode()
 	{
@@ -341,8 +322,8 @@ public class GameControllerScript : Singleton<GameControllerScript>
 	{
 		//this.camera.cullingMask = 0; //Sets the cullingMask to nothing
 		this.learningActive = true;
-		this.UnlockMouse(); //Unlock the mouse
-		this.tutorBaldi.Stop(); //Make tutor Baldi stop talking
+        Singleton<CursorControllerScript>.Instance.UnlockCursor();
+        this.tutorBaldi.Stop(); //Make tutor Baldi stop talking
 		if (!this.spoopMode) //If the player hasn't gotten a question wrong
 		{
 			this.schoolMusic.Stop(); //Start playing the learn music
@@ -355,8 +336,8 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		this.camera.cullingMask = this.cullingMask; //Sets the cullingMask to Everything
 		this.learningActive = false;
 		UnityEngine.Object.Destroy(subject);
-		this.LockMouse(); //Prevent the mouse from moving
-		if (this.player.stamina < 100f) //Reset Stamina
+        Singleton<CursorControllerScript>.Instance.LockCursor(); //Prevent the mouse from moving
+        if (this.player.stamina < 100f) //Reset Stamina
 		{
 			this.player.stamina = 100f;
 		}
@@ -423,9 +404,9 @@ public class GameControllerScript : Singleton<GameControllerScript>
 		this.exitsReached++;
 		if (this.exitsReached == 1)
 		{
-			RenderSettings.ambientLight = Color.red; //Make everything red and start player the weird sound
-			//RenderSettings.fog = true;
-			this.audioDevice.PlayOneShot(this.aud_Switch, 0.8f);
+			RenderSettings.ambientLight = Color.red;
+            Shader.SetGlobalColor("_SkyboxColor", Color.red);
+            this.audioDevice.PlayOneShot(this.aud_Switch, 0.8f);
 			endMusic.Tempo = 0.1f;
 			this.audioDevice.loop = true;
 			this.audioDevice.Play();

@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: Baldi's Basics Classic
+  companyName: al_ex427
+  productName: aModBasedOnKotlin
   defaultCursor: {fileID: 2800000, guid: e20f4fe154e958e4c8c7c754a6439ee8, type: 3}
   cursorHotspot: {x: 10, y: 2}
   m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
@@ -41,8 +41,6 @@ PlayerSettings:
     height: 1
   m_SplashScreenLogos:
   - logo: {fileID: 21300000, guid: f386fbcdffe4ce3409cd689c1b48a05d, type: 3}
-    duration: 3
-  - logo: {fileID: 21300000, guid: 44c18b24f1e95c9478a1267d34baea5f, type: 3}
     duration: 3
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
@@ -143,7 +141,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 1.4.3
+  bundleVersion: 0.1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0

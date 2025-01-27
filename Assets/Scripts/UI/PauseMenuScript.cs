@@ -8,14 +8,14 @@ public class PauseMenuScript : MonoBehaviour
     {
         if (this.usingJoystick & EventSystem.current.currentSelectedGameObject == null)
         {
-            if (!Singleton<GameControllerScript>.Instance.mouseLocked)
+            if (!Singleton<CursorControllerScript>.Instance.cursorLocked)
             {
-                Singleton<GameControllerScript>.Instance.LockMouse();
+                Singleton<CursorControllerScript>.Instance.LockCursor();
             }
         }
-        else if (!this.usingJoystick && Singleton<GameControllerScript>.Instance.mouseLocked)
+        else if (!this.usingJoystick && Singleton<CursorControllerScript>.Instance.cursorLocked)
         {
-            Singleton<GameControllerScript>.Instance.UnlockMouse();
+            Singleton<CursorControllerScript>.Instance.UnlockCursor();
         }
     }
 

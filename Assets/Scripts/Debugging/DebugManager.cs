@@ -33,8 +33,6 @@ namespace al_ex427.Debugging
 
         private void Awake()
         {
-            RenderDebugUI();
-
             if (!DebugOn)
             {
                 Debug.LogWarning("Debug is not on; Destroying the manager.");
@@ -42,24 +40,17 @@ namespace al_ex427.Debugging
                 return;
             }
         }
-        private void RenderDebugUI()
-        {
-            void OnGui()
-            {
-               
-                GUI.Box(new Rect(10, 150, 155, 70), "Invincible = False\nNoClip = False\nSuper Speed = False");
-                Debug.Log("Built the UI");
-            }
-            
-        }
        
     }
     public class RenderDebugUI : MonoBehaviour
     {
+        void Awake()
+        {
+            OnGUI();
+        }
         void OnGUI()
         {
-            
-
+            GUI.Box(new Rect(0, 0, 50, 75), "Invincible = False\nNoClip = False\nSuper Speed = false\n");
         }
     }
 }

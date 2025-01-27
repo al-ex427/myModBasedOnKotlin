@@ -49,7 +49,6 @@ public class NotebookScript : Interactable
     public override void Interact()
     {
         // Debug.LogError("Interacted"); Originally used for testing -al_ex427
-        this.bsc.Hear(base.transform.position, 1f);
         base.transform.position = new Vector3(base.transform.position.x, -20f, base.transform.position.z);
         this.up = false;
         this.respawnTime = 120f;

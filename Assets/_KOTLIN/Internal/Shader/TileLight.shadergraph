@@ -17,6 +17,9 @@
         },
         {
             "m_Id": "8f7984c66d124d0d95ffffbb38fabfc4"
+        },
+        {
+            "m_Id": "212fa2280adf4e11be7a3a6fce4ccd6b"
         }
     ],
     "m_Keywords": [],
@@ -30,6 +33,9 @@
         },
         {
             "m_Id": "06f97385342c43f889425f790b5b6cce"
+        },
+        {
+            "m_Id": "be46ca30055b4588bc83f73c78a0033d"
         }
     ],
     "m_Nodes": [
@@ -894,6 +900,36 @@
         "m_SerializableColors": []
     },
     "m_SerializedDescriptor": "SurfaceDescription.Emission"
+}
+
+{
+    "m_SGVersion": 3,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
+    "m_ObjectId": "212fa2280adf4e11be7a3a6fce4ccd6b",
+    "m_Guid": {
+        "m_GuidSerialized": "8ea11c06-bc30-4e53-8ca3-6a2780c723c1"
+    },
+    "m_Name": "FogColor",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "FogColor",
+    "m_DefaultReferenceName": "_FogColor",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 1.0
+    },
+    "isMainColor": false,
+    "m_ColorMode": 0
 }
 
 {
@@ -2869,6 +2905,18 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
+    "m_ObjectId": "be46ca30055b4588bc83f73c78a0033d",
+    "m_Name": "Fog",
+    "m_ChildObjectList": [
+        {
+            "m_Id": "212fa2280adf4e11be7a3a6fce4ccd6b"
+        }
+    ]
 }
 
 {

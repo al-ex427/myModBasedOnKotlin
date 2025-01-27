@@ -905,8 +905,8 @@ GameObject:
   - component: {fileID: 4346104798122753362}
   - component: {fileID: 8737610321244279504}
   - component: {fileID: 2907220170077470115}
-  - component: {fileID: 1849151647898356631}
   - component: {fileID: 2258883256392432898}
+  - component: {fileID: 7579647068341649297}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -1014,26 +1014,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eddc14c0cc036f40bfeb7c92c53f7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1849151647898356631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2997711258960866759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69085be9cb664fe40b212f95ae4538e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cc: {fileID: 2258883256392432898}
-  controlMouse: 1
-  unlockOnStart: 1
-  uiControlEnabled: 1
-  firstButton: {fileID: 0}
-  dummyButtonPC: {fileID: 3109300982260570065}
-  dummyButtonElse: {fileID: 3109300982260570065}
-  buttonTag: Button
 --- !u!114 &2258883256392432898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,6 +1024,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b1cf7b0345ae694f9736c18c217f0dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dontDestroyOnLoad: 0
+  cursorLocked: 0
+--- !u!114 &7579647068341649297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2997711258960866759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55938fb1577dd4ad3af7e994048c86f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3076067821282622859

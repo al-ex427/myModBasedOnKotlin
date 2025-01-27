@@ -1,4 +1,6 @@
-﻿using KOTLIN.Interactions;
+﻿using al_ex427.Debugging;
+using KOTLIN.Interactions;
+using Pixelplacement;
 using System.Collections;
 using System.Net.Security;
 using UnityEngine;
@@ -114,7 +116,7 @@ public class PlayerScript : MonoBehaviour
         this.GuiltCheck();
         if (this.cc.velocity.magnitude > 0f)
         {
-            this.gc.LockMouse();
+            Singleton<CursorControllerScript>.Instance.LockCursor();
         }
         if (this.jumpRope & (base.transform.position - this.frozenPosition).magnitude >= 1f) // If the player moves, deactivate the jumprope minigame
         {
@@ -224,7 +226,7 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.name == "Baldi" & !this.gc.debugMode)
+        if (other.transform.name == "Baldi" & !Singleton<DebugManager>.Instance.DebugOn)
         {
             this.gameOver = true;
             RenderSettings.skybox = this.blackSky; //Sets the skybox black
